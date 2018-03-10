@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nine-patch xmlns:android="http://schemas.android.com/apk/res/android"
+  android:src="@drawable/bg_list_section_divider_mtrl_alpha"
+  android:tint="@color/colorAccent"
+  android:dither="true"
+  />

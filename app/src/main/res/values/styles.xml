@@ -1,0 +1,68 @@
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+  </style>
+
+  <style name="AppTheme.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+  <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+    <item name="android:textSize">16sp</item>
+  </style>
+
+
+  <style name="MovieTitle" parent="@android:style/TextAppearance">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@color/text_white</item>
+    <item name="android:typeface">normal</item>
+    <item name="android:singleLine">false</item>
+    <item name="android:textSize">@dimen/text_large</item>
+  </style>
+
+  <style name="MovieTagline" parent="@android:style/TextAppearance">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@color/text_light_gray</item>
+    <item name="android:typeface">normal</item>
+    <item name="android:textStyle">italic</item>
+    <item name="android:singleLine">false</item>
+    <item name="android:ellipsize">marquee</item>
+    <item name="android:textSize">@dimen/text_small</item>
+  </style>
+
+  <style name="MovieOverview" parent="@android:style/TextAppearance">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@color/text_dark</item>
+    <item name="android:typeface">normal</item>
+    <item name="android:singleLine">false</item>
+    <item name="android:ellipsize">marquee</item>
+    <item name="android:textSize">@dimen/text_small</item>
+  </style>
+
+  <!-- Taken from Widget.TextView.ListSeparator -->
+  <style name="SettingsCategory" parent="@android:style/TextAppearance.Small">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:background">@drawable/bg_header_dither</item>
+    <item name="android:textAllCaps">true</item>
+  </style>
+
+  <style name="SettingsSummary" parent="@android:style/TextAppearance.Small">
+    <item name="android:maxLines">2</item>
+  </style>
+
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">电影浏览器</string>
+
+  <string name="tab_now_playing">热映</string>
+  <string name="tab_favorite">收藏</string>
+  <string name="tab_settings">设置</string>
+
+  <string name="title_similar_movies">相似的影片</string>
+
+  <string name="msg_added_to_favorite">已经收藏</string>
+  <string name="msg_removed_from_favorite">已从收藏中删除</string>
+
+  <string name="error_fetch_movie_list">从服务器读取电影列表失败</string>
+  <string name="error_fetch_movie_details">从服务器读取电影详情失败</string>
+  <string name="error_fetch_similar_movies">从服务器读取相似电影列表失败</string>
+
+  <string name="setting_category_data">数据</string>
+  <string name="setting_clear_data">清除数据</string>
+  <string name="setting_clear_data_summary">清除缓存的电影数据、图片以及本地收藏。</string>
+  <string name="setting_clear_cache">清除缓存</string>
+  <string name="setting_clear_cache_summary">清除缓存的电影数据以及图片。</string>
+
+  <string name="title_confirm_clear">清除用户数据</string>
+  <string name="message_confirm_clear">不仅是缓存的电影数据会被删除，本地收藏也会被清除。请确认继续清除操作。</string>
+
+  <string name="title_clearing">清除用户数据中</string>
+  <string name="message_clearing">开始清除 &#8230;</string>
+  <string name="message_clearing_fmt">清除 %s &#8230;</string>
+  <string name="message_clearing_item_cache">缓存的电影数据</string>
+  <string name="message_clearing_item_favorites">本地收藏</string>
+  <string name="message_clearing_item_images">缓存的图片</string>
+
+  <string name="setting_category_about">关于</string>
+  <string name="setting_about_summary">App例子</string>
+</resources>

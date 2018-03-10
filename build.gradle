@@ -1,0 +1,58 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+
+    // Add Java compile options
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            // options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+project.ext {
+    MIN_SDK_VERSION = 15
+    TARGET_SDK_VERSION = 27
+    COMPILE_SDK_VERSION = 27
+    BUILD_TOOLS_VERSION = "27.0.3"
+    SUPPORT_LIBRARY_VERSION = "27.0.2"
+
+    LIB_SUPPORT_V4 = 'com.android.support:support-v4:' + SUPPORT_LIBRARY_VERSION
+    LIB_SUPPORT_V13 = 'com.android.support:support-v13:' + SUPPORT_LIBRARY_VERSION
+    LIB_SUPPORT_ANNOTATIONS = 'com.android.support:support-annotations:' + SUPPORT_LIBRARY_VERSION
+    LIB_SUPPORT_APP_COMPACT_V7 = 'com.android.support:appcompat-v7:' + SUPPORT_LIBRARY_VERSION
+    LIB_SUPPORT_DESIGN = 'com.android.support:design:' + SUPPORT_LIBRARY_VERSION
+    LIB_SUPPORT_RECYCLERVIEW_V7 = 'com.android.support:recyclerview-v7:' + SUPPORT_LIBRARY_VERSION
+
+    LIB_ARCH_ROOM_RUNTIME = 'android.arch.persistence.room:runtime:1.0.0'
+    LIB_ARCH_ROOM_RXJAVA2 = 'android.arch.persistence.room:rxjava2:1.0.0'
+    LIB_ARCH_ROOM_COMPILER = 'android.arch.persistence.room:compiler:1.0.0'
+
+    LIB_JUNIT = 'junit:junit:4.12'
+    LIB_TEST_RUNNER = 'com.android.support.test:runner:1.0.1'
+    LIB_TEST_RULES = 'com.android.support.test:rules:1.0.1'
+    LIB_ESPRESSO_CORE = 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // URI constants for navigation:
+    URI_SCHEME = 'bsmb'
+    URI_HOST = 'bsmb.brianspace.github.com'
+}

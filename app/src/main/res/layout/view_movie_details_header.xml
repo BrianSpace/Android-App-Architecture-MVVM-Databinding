@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context="com.github.brianspace.moviebrowser.ui.activity.MovieDetailsActivity"
+  tools:ignore="ContentDescription">
+
+  <data>
+    <variable
+      name="movie"
+      type="com.github.brianspace.moviebrowser.viewmodels.MovieDetailsViewModel" />
+  </data>
+
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+      android:id="@+id/poster"
+      android:layout_width="@dimen/default_poster_width"
+      android:layout_height="@dimen/default_poster_height"
+      android:background="@color/colorBannerBackground"
+      android:scaleType="centerCrop"
+      app:moviePoster="@{movie}"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+      style="@style/MovieTitle"
+      android:id="@+id/title"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/text_margin"
+      android:background="@color/colorBannerBackground"
+      android:text="@{movie.title}"
+      app:layout_constraintStart_toEndOf="@id/poster"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+      android:id="@+id/tagline"
+      style="@style/MovieTagline"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:paddingLeft="@dimen/text_margin"
+      android:paddingRight="@dimen/text_margin"
+      android:paddingBottom="@dimen/text_margin"
+      android:background="@color/colorBannerBackground"
+      android:text="@{movie.tagline}"
+      app:layout_constraintStart_toEndOf="@id/poster"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/title"
+      app:layout_constraintBottom_toBottomOf="@id/poster"/>
+
+    <RatingBar
+      android:id="@+id/rating"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      style="?android:attr/ratingBarStyleSmall"
+      android:layout_marginLeft="@dimen/text_margin"
+      android:layout_marginStart="@dimen/text_margin"
+      android:layout_marginBottom="@dimen/text_margin"
+      android:numStars="5"
+      android:stepSize="0.1"
+      android:isIndicator="true"
+      android:rating="@{movie.rating}"
+      app:layout_constraintStart_toEndOf="@id/poster"
+      app:layout_constraintBottom_toBottomOf="@id/tagline"/>
+
+    <TextView
+      android:id="@+id/overview"
+      style="@style/MovieOverview"
+      android:padding="@dimen/text_margin"
+      android:text="@{movie.overview}"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/poster" />
+
+    <View
+      android:id="@+id/divider"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/light_gray"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/overview"
+      app:visibility="@{movie.similarMovies.movies}"/>
+
+    <TextView
+      style="@style/MovieTagline"
+      android:layout_margin="@dimen/text_margin"
+      android:text="@string/title_similar_movies"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/divider"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:visibility="@{movie.similarMovies.movies}"/>
+
+  </android.support.constraint.ConstraintLayout>
+
+</layout>

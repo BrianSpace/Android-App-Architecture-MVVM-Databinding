@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Android-App-Architecture-MVVM-Databinding.iml" filepath="$PROJECT_DIR$/Android-App-Architecture-MVVM-Databinding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib-common/lib-common.iml" filepath="$PROJECT_DIR$/lib-common/lib-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib-databinding/lib-databinding.iml" filepath="$PROJECT_DIR$/lib-databinding/lib-databinding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib-widgets/lib-widgets.iml" filepath="$PROJECT_DIR$/lib-widgets/lib-widgets.iml" />
+    </modules>
+  </component>
+</project>

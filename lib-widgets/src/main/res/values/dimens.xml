@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="UnusedResources">
+    <!-- DynamicGridView Defaults -->
+    <dimen name="default_grid_width">120dp</dimen>
+    <dimen name="default_grid_height">180dp</dimen>
+    <dimen name="default_grid_spacing">4dp</dimen>
+    <!-- SwipeRefreshLayoutEx Defaults -->
+    <dimen name="default_trigger_distance">10dp</dimen>
+</resources>

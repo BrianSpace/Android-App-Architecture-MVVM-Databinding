@@ -1,0 +1,3 @@
+[submodule "analysis"]
+	path = analysis
+	url = https://github.com/BrianSpace/Android-Quality-Essentials.git

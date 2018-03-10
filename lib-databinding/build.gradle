@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply from: '../analysis/quality/static_analysis.gradle'
+
+android {
+    compileSdkVersion project.COMPILE_SDK_VERSION
+    buildToolsVersion project.BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion project.MIN_SDK_VERSION
+        targetSdkVersion project.TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        debug {
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    testImplementation LIB_JUNIT
+    androidTestImplementation LIB_JUNIT
+    androidTestImplementation project.LIB_SUPPORT_ANNOTATIONS
+
+    // To avoid version conflict introduced by:
+    // +--- com.android.databinding:library:1.3.1
+    // |    +--- com.android.support:support-v4:21.0.3
+    implementation project.LIB_SUPPORT_V4
+    implementation project.LIB_SUPPORT_APP_COMPACT_V7
+    implementation project.LIB_SUPPORT_ANNOTATIONS
+    implementation project.LIB_SUPPORT_RECYCLERVIEW_V7
+}

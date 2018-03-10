@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="FixedAspectRatioImage">
+    <attr format="float" name="aspect_ratio"/>
+  </declare-styleable>
+
+  <declare-styleable name="DynamicGridView">
+    <attr format="dimension" name="min_cell_width"/>
+    <attr format="dimension" name="cell_spacing"/>
+  </declare-styleable>
+</resources>

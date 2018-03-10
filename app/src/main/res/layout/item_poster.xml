@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+    <variable
+      name="movie"
+      type="com.github.brianspace.moviebrowser.viewmodels.MovieViewModel"/>
+  </data>
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.github.brianspace.widgets.FixedAspectRatioImage
+      android:id="@+id/image"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorImageBackground"
+      android:minWidth="@dimen/default_poster_width"
+      android:onClick="@{movie::onClickItem}"
+      android:scaleType="centerCrop"
+      app:aspect_ratio="1.5"
+      app:moviePoster="@{movie}"/>
+    <RatingBar
+      android:id="@+id/rating"
+      style="?android:attr/ratingBarStyleSmall"
+      android:alpha="0.6"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/grid_spacing"
+      android:layout_marginStart="@dimen/grid_spacing"
+      android:layout_marginLeft="@dimen/grid_spacing"
+      android:layout_gravity="start|bottom"
+      android:isIndicator="true"
+      android:numStars="5"
+      android:rating="@{movie.rating}"
+      android:stepSize="0.1"/>
+    <ImageView
+      android:layout_width="@dimen/favorite_icon_size"
+      android:layout_height="@dimen/favorite_icon_size"
+      android:layout_marginTop="@dimen/grid_spacing"
+      android:layout_marginEnd="@dimen/grid_spacing"
+      android:layout_marginRight="@dimen/grid_spacing"
+      android:layout_gravity="end|top"
+      android:contentDescription="@{movie.title}"
+      android:scaleType="centerInside"
+      android:src="@drawable/ic_favorite"
+      android:tint="@color/colorAccent"
+      app:visibility="@{movie.isFavorite}"/>
+  </FrameLayout>
+
+</layout>
