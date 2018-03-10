@@ -39,6 +39,7 @@ The application has the following features:
 * Repository layer is the abstraction for data access to local storage (Shared Preferences, SQLite databases) and external Web APIs.
 ### Major Components
 ![](static/components.png)
+
 Most of the classe names are obvious. For those not very obvious:
 * [`TmdbConfig`](app/src/main/java/com/github/brianspace/moviebrowser/models/TmdbConfig.java): the class used to get the TMDb configurations. See <https://developers.themoviedb.org/3/configuration/get-api-configuration>. [`IImageConfig`](app/src/main/java/com/github/brianspace/moviebrowser/models/IImageConfig.java) is the interface for View Models to get image path configurations.
 * [`EntityStore`](app/src/main/java/com/github/brianspace/moviebrowser/models/EntityStore.java): the object store to hold the (weak) references of model layer entities.
@@ -65,22 +66,22 @@ Most of the classe names are obvious. For those not very obvious:
         - web: to access Web API of TMDb.
     - ui: UI layer classes.
         - activity: Activities in the application.
-        - databinding: BindingAdapters for databinding.
+        - databinding: BindingAdapters for databinding.
         - fragment: Fragments in the application.
         - nav: utility class NavigationHelper.
-        - view: application related UI controls.
+        - view: application related UI controls.
     - viewmodels: View Model layer classes.
 * Directory structure in Common module
     - objstore: object stor
-    - observable: observable patter inplementation for objects and collections.
+    - observable: observable patter inplementation for objects and collections.
     - util: utility classes.
 * Directory structure in Databinding module
     - adapter: list adapter for RecyclerView, supporting binding to ObservableList.
     - message: display notifications through databinding, so that view model can show notifications (Toast for now) without depending on UI controls.
 * Directory structure in Widgets module
     - behaviors: behaviros for CoordinatorLayout.
-    - utils: utility classes. ImageLoader for now.
-    - widgets: project independent, reusable UI controls.
+    - utils: utility classes. ImageLoader for now.
+    - widgets: project independent, reusable UI controls.
 ## Get started
 Before you can run the application, you need to register a developer account following the [TMDb introductions](https://developers.themoviedb.org/3/getting-started/introduction) and get the API key. Then add the API key in the project's `gradle.properties` file:
 ```properties
