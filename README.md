@@ -127,7 +127,7 @@ The usage of the following well know libraries/frameworks/widgets are demonstrat
 * View binding: [Butterknife](https://github.com/JakeWharton/butterknife), used to avoid `findViewById`.
 * Unit test frameworks:
   * [Mockito](https://github.com/mockito/mockito) mock framework
-  * [Robolectric](http://robolectric.org/) unit test framework which run unit tests depending on Android SDK, locally.
+  * [Robolectric](http://robolectric.org/) unit test framework which run unit tests depending on Android SDK, locally.
 * Browser SQLite databases and SharedPreferences: [Android-Debug-Database](https://github.com/amitshekhariitbhu/Android-Debug-Database)
 ## Code Quality
 In order to ensure the code quality, the following project is use (as a submodule) in this application:
