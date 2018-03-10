@@ -38,6 +38,7 @@
 * Repository层是对数据访问的抽象，包括本地数据（Shared Preferences, SQLite数据库）及外部Web APIs。
 ### 主要组件
 ![](static/components.png)
+
 大部分的类名的含义都很明显。不是那么明显的：
 * [`TmdbConfig`](app/src/main/java/com/github/brianspace/moviebrowser/models/TmdbConfig.java)：用于处理来自TMDb网站的配置信息。参见<https://developers.themoviedb.org/3/configuration/get-api-configuration>。[`IImageConfig`](app/src/main/java/com/github/brianspace/moviebrowser/models/IImageConfig.java)是供上面的View Model层获取图片路径的接口。
 * [`EntityStore`](app/src/main/java/com/github/brianspace/moviebrowser/models/EntityStore.java)是用来保存Model层实体对象（弱）引用的对象存储器。
@@ -49,7 +50,7 @@
 作为系统结构的开发视图，清晰的模块划分和目录结构（对应Java的包结构）也是构成清晰架构必不可少的一部分。
 * 模块划分
     - app：应用主模块
-    - lib-common：通用功能模块
+    - lib-common：通用功能模块
     - lib-databinding：数据绑定支持模块
     - lib-widgets：可重用UI控件模块
 * App模块目录结构
