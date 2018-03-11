@@ -12,7 +12,7 @@
 
 ## 应用截屏
 
-![Now Playing Page](static/now_playing.gif) ![Movie Details Page](static/details.gif) ![Favorites](static/favorite.gif)
+![Now Playing Page](https://s1.ax1x.com/2018/03/11/9WRzRJ.gif) ![Movie Details Page](https://s1.ax1x.com/2018/03/11/9WW9MR.gif) ![Favorites](https://s1.ax1x.com/2018/03/11/9WWSz9.gif)
 ## 应用功能简介
 本应用有如下功能：
 * 主页显示三个Tab：正在上映、收藏、设置。
@@ -26,7 +26,7 @@
 * 在设置页面，可以清除应用的缓存（HTTP、图片）以及本地收藏。
 ## 应用架构
 ### 结构分层
-![](static/layers.png)
+![](https://s1.ax1x.com/2018/03/11/9WRviF.png)
 * 依赖关系
     * 自上而下的单向依赖。下层通过以下形式与上层通讯：
         * View Model通过数据绑定通知UI。
@@ -37,7 +37,7 @@
 * Model层是整个应用的领域模型，应与UI和平台无关。换句话说，就是既不依赖于应用的交互及UI设计，也不依赖于安卓平台。（本项目中依赖了SparseArray，但只是出于性能的需要，如果有必要可随时替换。）
 * Repository层是对数据访问的抽象，包括本地数据（Shared Preferences, SQLite数据库）及外部Web APIs。
 ### 主要组件
-![](static/components.png)
+![](https://s1.ax1x.com/2018/03/11/9WRxG4.png)
 
 大部分的类名的含义都很明显。不是那么明显的：
 * [`TmdbConfig`](app/src/main/java/com/github/brianspace/moviebrowser/models/TmdbConfig.java)：用于处理来自TMDb网站的配置信息。参见<https://developers.themoviedb.org/3/configuration/get-api-configuration>。[`IImageConfig`](app/src/main/java/com/github/brianspace/moviebrowser/models/IImageConfig.java)是供上面的View Model层获取图片路径的接口。
