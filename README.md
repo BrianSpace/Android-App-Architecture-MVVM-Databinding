@@ -48,6 +48,7 @@ Most of the classe names are obvious. For those not very obvious:
 * [`IFavoriteStore`](app/src/main/java/com/github/brianspace/moviebrowser/repository/IFavoriteStore.java): used to access favorite movies.
 * [`IMovieDbService`](app/src/main/java/com/github/brianspace/moviebrowser/repository/IMovieDbService.java): used to access the Web API of "The Movie DB".
 ### Module/Directory Structure
+As the development view of the application architecture, it is an essential part to have a clear separation into modules and directory structure (packages in Java).
 * Modules division
     - app: main application module.
     - lib-common: common functionality
