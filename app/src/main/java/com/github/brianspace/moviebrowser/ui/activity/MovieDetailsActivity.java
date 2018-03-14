@@ -21,7 +21,6 @@ import static android.widget.Toast.LENGTH_LONG;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -38,7 +37,7 @@ import com.github.brianspace.moviebrowser.viewmodels.MovieDetailsViewModel;
 import com.github.brianspace.moviebrowser.viewmodels.MovieViewModel;
 import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
-import dagger.android.AndroidInjection;
+import dagger.android.support.DaggerAppCompatActivity;
 import io.reactivex.CompletableObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.functions.Functions;
@@ -47,7 +46,7 @@ import javax.inject.Inject;
 /**
  * Activity used to show movie details.
  */
-public class MovieDetailsActivity extends AppCompatActivity {
+public class MovieDetailsActivity extends DaggerAppCompatActivity {
 
     // region Private Constants
 
@@ -128,7 +127,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details);
         setSupportActionBar(binding.toolbar);

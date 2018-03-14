@@ -16,9 +16,7 @@
 
 package com.github.brianspace.moviebrowser.ui.fragment;
 
-import android.content.Context;
 import com.github.brianspace.moviebrowser.viewmodels.IMovieList;
-import dagger.android.AndroidInjection;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -33,12 +31,6 @@ public class NowPlayingMovieListFragment extends MovieListFragment {
     @Inject
     @Named("NowPlaying")
     /* default */ IMovieList nowPlayingMoviesViewModel;
-
-    @Override
-    public void onAttach(final Context context) {
-        AndroidInjection.inject(this);
-        super.onAttach(context);
-    }
 
     @Override
     protected IMovieList getMovieList() {

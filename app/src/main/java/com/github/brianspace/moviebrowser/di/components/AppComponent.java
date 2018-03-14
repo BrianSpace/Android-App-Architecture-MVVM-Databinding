@@ -16,35 +16,51 @@
 
 package com.github.brianspace.moviebrowser.di.components;
 
-import android.content.Context;
 import com.github.brianspace.moviebrowser.MovieBrowserApplication;
 import com.github.brianspace.moviebrowser.di.modules.AppModule;
-import com.github.brianspace.moviebrowser.di.modules.UiModule;
-import com.github.brianspace.moviebrowser.di.qualifiers.ApplicationContext;
+import com.github.brianspace.moviebrowser.di.modules.FavoriteMovieListFragmentModule;
+import com.github.brianspace.moviebrowser.di.modules.MainActivityModule;
+import com.github.brianspace.moviebrowser.di.modules.MovieDetailsActivityModule;
+import com.github.brianspace.moviebrowser.di.modules.NowPlayingMovieListFragmentModule;
+import com.github.brianspace.moviebrowser.di.modules.SettingsFragmentModule;
 import com.github.brianspace.moviebrowser.models.ModelsModule;
 import com.github.brianspace.moviebrowser.repository.local.LocalRepositoryModule;
 import com.github.brianspace.moviebrowser.repository.web.MovieDbServiceModule;
 import com.github.brianspace.moviebrowser.viewmodels.ViewModelsModule;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
+import dagger.android.AndroidInjector;
+import dagger.android.support.AndroidSupportInjectionModule;
 import javax.inject.Singleton;
 
 /**
  * Dagger component for the application.
+ * Note: AndroidSupportInjectionModule was added due to https://github.com/google/dagger/issues/783.
  */
 @Singleton
-@Component(modules = {AndroidInjectionModule.class, AppModule.class, UiModule.class, ViewModelsModule.class,
-        ModelsModule.class, LocalRepositoryModule.class, MovieDbServiceModule.class})
-public interface AppComponent {
+@Component(modules = {AndroidInjectionModule.class, AndroidSupportInjectionModule.class, AppModule.class,
+        MainActivityModule.class, MovieDetailsActivityModule.class, NowPlayingMovieListFragmentModule.class,
+        FavoriteMovieListFragmentModule.class, SettingsFragmentModule.class,
+        ViewModelsModule.class, ModelsModule.class, LocalRepositoryModule.class, MovieDbServiceModule.class})
+public interface AppComponent extends AndroidInjector<MovieBrowserApplication> {
 
     /**
-     * Provide application context.
+     * Component builder.
      */
-    @ApplicationContext
-    Context getContext();
+    @Component.Builder
+    interface Builder {
 
-    /**
-     * Inject MovieBrowserApplication.
-     */
-    void inject(MovieBrowserApplication application);
+        /**
+         * Builder for the component.
+         * @return the component instance.
+         */
+        AppComponent build();
+
+        /**
+         * Module dependency that need to be created manually and passed in.
+         * @param appModule instance of the AppModule.
+         * @return the builder instance so that the call can be chained.
+         */
+        Builder appModule(AppModule appModule);
+    }
 }

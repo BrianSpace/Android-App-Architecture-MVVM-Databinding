@@ -17,9 +17,7 @@
 package com.github.brianspace.moviebrowser.ui.fragment;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog.Builder;
@@ -30,7 +28,7 @@ import android.view.ViewGroup;
 import com.github.brianspace.moviebrowser.R;
 import com.github.brianspace.moviebrowser.models.DataCleaner;
 import com.github.brianspace.moviebrowser.models.DataCleaner.Stage;
-import dagger.android.AndroidInjection;
+import dagger.android.DaggerFragment;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
@@ -40,7 +38,7 @@ import javax.inject.Inject;
 /**
  * Fragment for settings page.
  */
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends DaggerFragment {
 
     // region Private Constants
 
@@ -62,12 +60,6 @@ public class SettingsFragment extends Fragment {
     // endregion
 
     // region Public Overrides
-
-    @Override
-    public void onAttach(final Context context) {
-        AndroidInjection.inject(this);
-        super.onAttach(context);
-    }
 
     @Nullable
     @Override

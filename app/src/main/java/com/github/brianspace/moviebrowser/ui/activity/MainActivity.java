@@ -23,7 +23,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v7.app.AppCompatActivity;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,24 +31,14 @@ import com.github.brianspace.moviebrowser.R;
 import com.github.brianspace.moviebrowser.ui.fragment.FavoriteMovieListFragment;
 import com.github.brianspace.moviebrowser.ui.fragment.NowPlayingMovieListFragment;
 import com.github.brianspace.moviebrowser.ui.fragment.SettingsFragment;
-import dagger.android.AndroidInjection;
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasFragmentInjector;
-import javax.inject.Inject;
+import dagger.android.support.DaggerAppCompatActivity;
 
 /**
  * The application homepage.
  */
-public class MainActivity extends AppCompatActivity implements HasFragmentInjector {
+public class MainActivity extends DaggerAppCompatActivity {
 
     // region Package Private Fields
-
-    /**
-     * Dagger injector for child fragments.
-     */
-    @Inject
-    /* default */ DispatchingAndroidInjector<Fragment> injector;
 
     /**
      * View pager.
@@ -174,7 +163,6 @@ public class MainActivity extends AppCompatActivity implements HasFragmentInject
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -187,11 +175,6 @@ public class MainActivity extends AppCompatActivity implements HasFragmentInject
         // Use Glide.with(this).onDestroy() in onDestroy will cause exceptions.
         Glide.with(this).pauseRequests();
         super.onStop();
-    }
-
-    @Override
-    public AndroidInjector<Fragment> fragmentInjector() {
-        return injector;
     }
 
     // endregion

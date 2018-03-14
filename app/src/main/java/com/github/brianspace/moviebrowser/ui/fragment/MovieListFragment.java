@@ -16,19 +16,19 @@
 
 package com.github.brianspace.moviebrowser.ui.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.github.brianspace.moviebrowser.ui.view.MovieListView;
 import com.github.brianspace.moviebrowser.viewmodels.IMovieList;
+import dagger.android.DaggerFragment;
 
 /**
  * Fragment for movie list.
  * Create subclass and override getMovieList.
  */
-public abstract class MovieListFragment extends Fragment {
+public abstract class MovieListFragment extends DaggerFragment {
 
     /**
      * The view created to show the movie list.
