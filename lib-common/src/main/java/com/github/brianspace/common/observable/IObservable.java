@@ -16,6 +16,8 @@
 
 package com.github.brianspace.common.observable;
 
+import android.support.annotation.NonNull;
+
 /**
  * Interface for observable objects.
  *
@@ -29,14 +31,14 @@ public interface IObservable<ObserverT> {
      *
      * @param observer the Observer to add.
      */
-    void addObserver(ObserverT observer);
+    void addObserver(@NonNull ObserverT observer);
 
     /**
      * Removes the specified observer from the list of observers. Passing null won't do anything.
      *
      * @param observer the observer to remove.
      */
-    void deleteObserver(ObserverT observer);
+    void deleteObserver(@NonNull ObserverT observer);
 
     /**
      * Removes all observers from the list of observers.

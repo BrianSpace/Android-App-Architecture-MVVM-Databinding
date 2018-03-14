@@ -17,6 +17,7 @@
 package com.github.brianspace.utils;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -152,9 +153,9 @@ public class ImageLoader<T> {
      * Load image from the specified URL into the ImageView.
      *
      * @param view  the target ImageView
-     * @param url   the URL of the image to be loaded
+     * @param url   the URL of the image to be loaded. Null to clear the view.
      */
-    public static void loadImage(final ImageView view, final String url) {
+    public static void loadImage(@NonNull final ImageView view, @Nullable final String url) {
         if (TextUtils.isEmpty(url)) {
             Glide.with(view.getContext()).clear(view);
         } else {
@@ -171,10 +172,10 @@ public class ImageLoader<T> {
      *
      * @param view          the target ImageView
      * @param urlProvider   the object to provider the image URL.
-     * @param getUrl        the function to get the URL of the image.
+     * @param getUrl        the function to get the URL of the image (from urlProvider).
      */
-    public void loadImage(final ImageView view, final T urlProvider,
-            final Function<T, String> getUrl) {
+    public void loadImage(@NonNull final ImageView view, @NonNull final T urlProvider,
+            @NonNull final Function<T, String> getUrl) {
         final int width = view.getWidth();
         if (width == 0) {
             // Delay the image loading till measured if the size is zero.

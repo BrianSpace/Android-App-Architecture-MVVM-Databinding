@@ -16,6 +16,9 @@
 
 package com.github.brianspace.common.observable;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 /**
  * Interface for observers.
  */
@@ -28,5 +31,5 @@ public interface IObserver {
      * @param data          Object passed to {@link ObjectObservableBase#notifyObservers(Object)} when a specific item
      *                      in a collection changed.
      */
-    void onUpdate(IObservable<IObserver> observable, Object data);
+    void onUpdate(@NonNull IObservable<IObserver> observable, @Nullable Object data);
 }

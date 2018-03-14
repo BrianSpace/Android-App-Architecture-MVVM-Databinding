@@ -57,7 +57,7 @@ public final class ModelObjectStore<M, D extends IEntity> extends ObjectStore<M>
      * @return the model matching the lower layer object.
      */
     @NonNull
-    public M getOrCreate(final D lowerObj) {
+    public M getOrCreate(@NonNull final D lowerObj) {
         rwLock.readLock().lock(); // Read lock
         try {
             final int key = lowerObj.getId();

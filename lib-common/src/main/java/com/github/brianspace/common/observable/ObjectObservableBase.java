@@ -16,6 +16,8 @@
 
 package com.github.brianspace.common.observable;
 
+import android.support.annotation.Nullable;
+
 /**
  * Base class for a single observable object.
  */
@@ -40,7 +42,7 @@ public class ObjectObservableBase extends WeakObservable<IObserver> {
      * @param data the argument passed to {@code onUpdate()}.
      */
     @SuppressWarnings("unchecked")
-    protected void notifyObservers(final Object data) {
+    protected void notifyObservers(@Nullable final Object data) {
         foreachObserver(observer -> observer.onUpdate(this, data));
     }
 }

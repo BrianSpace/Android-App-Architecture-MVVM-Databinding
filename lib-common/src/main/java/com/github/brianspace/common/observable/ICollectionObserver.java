@@ -16,6 +16,8 @@
 
 package com.github.brianspace.common.observable;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -44,5 +46,6 @@ public interface ICollectionObserver {
      * @param item          Item in the collection which was modified (RemoveItem, UpdateItem).
      * @param range         The range changed (AppendRange).
      */
-    void onUpdate(IObservable<ICollectionObserver> observable, Action action, Object item, List<Object> range);
+    void onUpdate(@NonNull IObservable<ICollectionObserver> observable, @NonNull Action action, @Nullable Object item,
+            @Nullable List<Object> range);
 }

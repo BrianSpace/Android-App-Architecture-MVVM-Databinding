@@ -91,7 +91,6 @@ public abstract class WeakObservable<ObserverT> implements IObservable<ObserverT
         }
     }
 
-
     @Override
     public boolean hasChanged() {
         return changed;
@@ -120,20 +119,20 @@ public abstract class WeakObservable<ObserverT> implements IObservable<ObserverT
     /**
      * Interface for the call back of notification.
      */
-    protected interface INotificationCallback<ObserverT> {
+    protected interface INotificationCallback<T> {
 
         /**
          * Method to be called when a notification comes.
          * @param observer the observer object.
          */
-        void onNotify(ObserverT observer);
+        void onNotify(T observer);
     }
 
     /**
      * Calls the specified action for each observer.
      * @param action action to be called.
      */
-    protected void foreachObserver(final INotificationCallback<ObserverT> action) {
+    protected void foreachObserver(@NonNull final INotificationCallback<ObserverT> action) {
         final List<ObserverT> tempObserverList = new ArrayList<>();
         final List<WeakReference<ObserverT>> listToRemove = new ArrayList<>();
         synchronized (this) {

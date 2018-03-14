@@ -16,6 +16,7 @@
 
 package com.github.brianspace.common.observable;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class CollectionObservableBase extends WeakObservable<ICollectionObserver
      * @param range     the range of items that changed.
      */
     @SuppressWarnings("unchecked")
-    protected void notifyObservers(final ICollectionObserver.Action action, @Nullable final Object item,
+    protected void notifyObservers(@NonNull final ICollectionObserver.Action action, @Nullable final Object item,
             @Nullable final List<Object> range) {
         foreachObserver(observer -> observer.onUpdate(this, action, item, range));
     }

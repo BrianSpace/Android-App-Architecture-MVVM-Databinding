@@ -17,6 +17,8 @@
 package com.github.brianspace.databinding.message;
 
 import android.databinding.BindingAdapter;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
 import com.github.brianspace.databinding.message.IMessageSource.Type;
@@ -48,8 +50,8 @@ public final class MessageBindingAdapter {
      */
     @BindingAdapter({"messageSource"})
     @SuppressWarnings("PMD.CompareObjectsWithEquals")
-    public static void showMessage(final View view, final IMessageSource oldMessageSource,
-            final IMessageSource messageSource) {
+    public static void showMessage(@NonNull final View view, @Nullable final IMessageSource oldMessageSource,
+            @Nullable final IMessageSource messageSource) {
         if (view == null || messageSource == null || oldMessageSource == messageSource) {
             return;
         }
