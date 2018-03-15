@@ -20,7 +20,6 @@ import static android.widget.Toast.LENGTH_LONG;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -35,11 +34,11 @@ import com.github.brianspace.moviebrowser.viewmodels.IMovieList;
 import com.github.brianspace.moviebrowser.viewmodels.IViewModelFactory;
 import com.github.brianspace.moviebrowser.viewmodels.MovieDetailsViewModel;
 import com.github.brianspace.moviebrowser.viewmodels.MovieViewModel;
-import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 import dagger.android.support.DaggerAppCompatActivity;
-import io.reactivex.CompletableObserver;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.internal.functions.Functions;
 import javax.inject.Inject;
 
@@ -70,40 +69,10 @@ public class MovieDetailsActivity extends DaggerAppCompatActivity {
      */
     private ActivityMovieDetailsBinding binding;
 
-    // endregion
-
-    // region Private Inner Types
-
     /**
-     * RxJava Observer for similar movies.
+     * Save subscriptions for unsubscribing during onDestroy().
      */
-    private static class SimilarMoviesObserver implements CompletableObserver {
-
-        /**
-         * The SwipyRefreshLayout control, used to stop its animation when an error occurs.
-         */
-        private final SwipyRefreshLayout swipeRefresh;
-
-        /* default */ SimilarMoviesObserver(@NonNull final SwipyRefreshLayout swipeRefresh) {
-            this.swipeRefresh = swipeRefresh;
-        }
-
-        @Override
-        public void onSubscribe(final Disposable d) {
-            // Not used
-        }
-
-        @Override
-        public void onError(final Throwable e) {
-            swipeRefresh.setRefreshing(false);
-            Toast.makeText(swipeRefresh.getContext(), R.string.error_fetch_similar_movies, LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onComplete() {
-            swipeRefresh.setRefreshing(false);
-        }
-    }
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     // endregion
 
@@ -147,10 +116,14 @@ public class MovieDetailsActivity extends DaggerAppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         // Release the reference to view model to prevent leak of MovieDetailsActivity.
         binding.swipeRefresh.setOnRefreshListener(null);
         binding.similarMovieList.setAdapter(null);
         binding = null;
+
+        // Unsubscribe observers.
+        compositeDisposable.dispose();
     }
 
     // endregion
@@ -188,10 +161,10 @@ public class MovieDetailsActivity extends DaggerAppCompatActivity {
         }
 
         binding.setMovie(movie);
-        movie.loadDetails().subscribe(Functions.EMPTY_ACTION,
+        compositeDisposable.add(movie.loadDetails().subscribe(Functions.EMPTY_ACTION,
                 err -> { // onError
                     Toast.makeText(this, R.string.error_fetch_movie_details, LENGTH_LONG).show();
-                });
+                }));
 
         loadSimilarMovies(movie);
     }
@@ -205,16 +178,21 @@ public class MovieDetailsActivity extends DaggerAppCompatActivity {
                 new HeaderedRecyclerViewDatabindingAdapter<>(similarMovies.getMovies(), BR.movie,
                         R.layout.item_poster, headerParams);
         binding.similarMovieList.setAdapter(similarMoviesAdapter);
-        similarMovies.load().subscribe(new SimilarMoviesObserver(binding.swipeRefresh));
+
+        final Action onComplete = () -> binding.swipeRefresh.setRefreshing(false);
+        final Consumer<? super Throwable> onError = err -> {
+            binding.swipeRefresh.setRefreshing(false);
+            Toast.makeText(this, R.string.error_fetch_similar_movies, LENGTH_LONG).show();
+        };
+
+        compositeDisposable.add(similarMovies.load().subscribe(onComplete, onError));
 
         binding.swipeRefresh.setDirection(SwipyRefreshLayoutDirection.BOTTOM);
         binding.swipeRefresh.setDistanceToTriggerSync(
                 getResources().getDimensionPixelSize(com.github.brianspace.widgets.R.dimen.default_trigger_distance));
         binding.swipeRefresh.setOnRefreshListener(direction -> {
             if (direction == SwipyRefreshLayoutDirection.BOTTOM && !similarMovies.isLoading()) {
-                similarMovies.loadNextPage().subscribe(
-                        new SimilarMoviesObserver(binding.swipeRefresh)
-                );
+                compositeDisposable.add(similarMovies.loadNextPage().subscribe(onComplete, onError));
             }
         });
     }
