@@ -60,7 +60,7 @@ class FavoriteStore implements IFavoriteStore {
     /**
      * The ROOM database for favorite movies.
      */
-    private final FavoriteDatabase favoriteDatabase;
+    private FavoriteDatabase favoriteDatabase;
 
     // endregion
 
@@ -74,7 +74,7 @@ class FavoriteStore implements IFavoriteStore {
     @Inject
     /* default */ FavoriteStore(@ApplicationContext final Context context) {
         this.appContext = context;
-        favoriteDatabase = Room.databaseBuilder(appContext, FavoriteDatabase.class, Constants.DATABASE_NAME).build();
+        buildFavoriteDatabase();
     }
 
     // endregion
@@ -96,6 +96,8 @@ class FavoriteStore implements IFavoriteStore {
         if (databaseJournalFile.exists()) {
             result = result && databaseJournalFile.delete();
         }
+
+        buildFavoriteDatabase();
 
         return result;
     }
@@ -133,6 +135,14 @@ class FavoriteStore implements IFavoriteStore {
             final FavoriteDao dao = favoriteDatabase.getDao();
             return dao.deleteFavorite(movie.getId()) == 1;
         });
+    }
+
+    // endregion
+
+    // region Private Methods
+
+    private void buildFavoriteDatabase() {
+        favoriteDatabase = Room.databaseBuilder(appContext, FavoriteDatabase.class, Constants.DATABASE_NAME).build();
     }
 
     // endregion
