@@ -32,8 +32,6 @@ android {
 }
 
 dependencies {
-    implementation project(':lib-common')
-
     implementation KOTLIN_STDLIB
 
     // Databinding compiler
