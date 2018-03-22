@@ -1,4 +1,4 @@
-# 安卓应用架构展示 - 基于数据绑定的MVVM架构 [[English Version](README.md)]
+# 安卓应用架构展示 - 基于数据绑定的MVVM架构 (Java 版本) [[Kotlin版本](../../blob/kotlin/README_zh.md)]  [[English Version](README.md)]
 本项目作为安卓应用MVVM架构的例子，展示了如何使用此架构开发一个影视信息网站[The Movie DB](https://www.themoviedb.org/)的客户端。
 
 ## 为什么采用 [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)？
