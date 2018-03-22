@@ -103,14 +103,14 @@ class AutoHideWhenScrollDownBehavior<V : View> : CoordinatorLayout.Behavior<V> {
     /**
      * Default constructor.
      */
-    constructor() : super() {}
+    constructor() : super()
 
     /**
      * Constructor.
      * @param context Context.
      * @param attrs Attributes.
      */
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     // endregion
 

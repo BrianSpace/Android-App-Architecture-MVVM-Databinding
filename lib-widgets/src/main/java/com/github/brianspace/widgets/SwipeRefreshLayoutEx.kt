@@ -34,9 +34,9 @@ class SwipeRefreshLayoutEx : SwipyRefreshLayout {
 
     // region Constructors
 
-    constructor(context: Context) : super(context) {}
+    constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     // endregion
 

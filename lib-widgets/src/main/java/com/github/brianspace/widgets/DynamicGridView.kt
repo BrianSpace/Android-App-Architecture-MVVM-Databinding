@@ -152,14 +152,14 @@ class DynamicGridView : RecyclerView {
 
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
             // Invalidate if the items are not appended at the end.
-            if (getAdapter().getItemCount() != positionStart + itemCount) {
+            if (adapter.itemCount != positionStart + itemCount) {
                 updateItemDecoration()
             }
         }
 
         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
             // Invalidate if the items are not removed at the end.
-            if (getAdapter().getItemCount() != positionStart) {
+            if (adapter.itemCount != positionStart) {
                 updateItemDecoration()
             }
         }
@@ -171,7 +171,7 @@ class DynamicGridView : RecyclerView {
         private fun updateItemDecoration() {
             if (isActive) {
                 invalidateItemDecorations()
-                getLayoutManager().requestLayout()
+                layoutManager.requestLayout()
             } else {
                 needUpdateItemDecoration = true
             }
@@ -231,7 +231,7 @@ class DynamicGridView : RecyclerView {
 
     // region Protected Overrides
 
-    protected override fun onFocusChanged(
+    override fun onFocusChanged(
         gainFocus: Boolean, direction: Int,
         previouslyFocusedRect: Rect?
     ) {
