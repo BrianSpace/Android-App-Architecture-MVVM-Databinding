@@ -14,54 +14,52 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository;
+package com.github.brianspace.moviebrowser.repository
 
-import android.support.annotation.NonNull;
-import com.github.brianspace.moviebrowser.repository.data.MovieData;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import java.util.List;
+import com.github.brianspace.moviebrowser.repository.data.MovieData
+import io.reactivex.Maybe
+import io.reactivex.Single
 
 /**
  * Interface for favorite movie storage.
  */
-public interface IFavoriteStore {
+interface IFavoriteStore {
+
+    /**
+     * Get all favorite movies.
+     *
+     * @return RxJava `Single` for the list of movies.
+     */
+    val allFavoriteMovies: Single<List<MovieData>>
 
     /**
      * Clear all favorite movies.
      *
      * @return true if the data is cleared (false if failed to clear).
      */
-    boolean clearData();
+    fun clearData(): Boolean
 
     /**
      * Add a favorite movie.
      *
      * @param movie the data layer movie object.
-     * @return RxJava {@code Single} for the boolean result (false if failed to add).
+     * @return RxJava `Single` for the boolean result (false if failed to add).
      */
-    Single<Boolean> addFavoriteMovie(@NonNull MovieData movie);
+    fun addFavoriteMovie(movie: MovieData): Single<Boolean>
 
     /**
      * Get a favorite movie by ID.
      *
      * @param favoriteId ID of the movie.
-     * @return RxJava {@code Maybe} for the movie.
+     * @return RxJava `Maybe` for the movie.
      */
-    Maybe<MovieData> getFavoriteMovie(long favoriteId);
-
-    /**
-     * Get all favorite movies.
-     *
-     * @return RxJava {@code Single} for the list of movies.
-     */
-    Single<List<MovieData>> getAllFavoriteMovies();
+    fun getFavoriteMovie(favoriteId: Long): Maybe<MovieData>
 
     /**
      * Delete a favorite movie.
      *
      * @param movie the data layer movie object.
-     * @return RxJava {@code Single} for the boolean result (false if failed to delete).
+     * @return RxJava `Single` for the boolean result (false if failed to delete).
      */
-    Single<Boolean> deleteFavoriteMovie(@NonNull MovieData movie);
+    fun deleteFavoriteMovie(movie: MovieData): Single<Boolean>
 }

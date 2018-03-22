@@ -14,43 +14,29 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.data;
+package com.github.brianspace.moviebrowser.repository.data
 
 /**
  * Movie collection.
  */
-@SuppressWarnings({"PMD.DataClass", "PMD.CommentRequired"})
-public class Collection {
-    private int id;
-    private String name;
-    private String posterPath;
-    private String backdropPath;
-
+class Collection {
     /**
      * Get collection ID.
      */
-    public int getId() {
-        return id;
-    }
+    val id: Int = 0
 
     /**
      * Get collection name.
      */
-    public String getName() {
-        return name;
-    }
+    val name: String? = null
 
     /**
      * Get the poster path (in the URL).
      */
-    public String getPosterPath() {
-        return posterPath;
-    }
+    val posterPath: String? = null
 
     /**
      * Get the backdrop image path (in the URL).
      */
-    public String getBackdropPath() {
-        return backdropPath;
-    }
+    val backdropPath: String? = null
 }

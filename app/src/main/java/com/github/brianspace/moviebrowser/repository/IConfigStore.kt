@@ -14,32 +14,12 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import java.util.Set;
+package com.github.brianspace.moviebrowser.repository
 
 /**
  * Interface for configuration repository.
  */
-public interface IConfigStore {
-
-    /**
-     * Key for image base URL from TMDb.
-     */
-    String KEY_TMDB_IMAGE_BASE_URL = "TMDB_IMAGE_BASE_URL";
-
-    /**
-     * Key for the sizes of backdrop images from TMDb.
-     */
-    String KEY_TMDB_BACKDROP_SIZES = "TMDB_BACKDROP_SIZES";
-
-    /**
-     * Key for the sizes of poster images from TMDb.
-     */
-    String KEY_TMDB_POSTER_SIZES = "TMDB_POSTER_SIZES";
-
+interface IConfigStore {
 
     /**
      * Get a configuration item by the specified key.
@@ -47,8 +27,7 @@ public interface IConfigStore {
      * @param key the key used to retrieve the config item.
      * @return config string corresponding to the key.
      */
-    @Nullable
-    String getConfigItem(@NonNull String key);
+    fun getConfigItem(key: String): String?
 
     /**
      * Get a configuration set by the specified key.
@@ -56,21 +35,37 @@ public interface IConfigStore {
      * @param key the key used to retrieve the config set.
      * @return config set corresponding to the key.
      */
-    @Nullable
-    Set<String> getConfigSet(@NonNull String key);
+    fun getConfigSet(key: String): Set<String>?
 
     /**
      * Save config.
      * @param key   config key.
      * @param value config value.
      */
-    void saveConfigItem(@NonNull String key, @NonNull String value);
-
+    fun saveConfigItem(key: String, value: String)
 
     /**
      * Save config set.
      * @param key    config set key.
      * @param values config set values.
      */
-    void saveConfigSet(@NonNull String key, @NonNull Set<String> values);
+    fun saveConfigSet(key: String, values: Set<String>)
+
+    companion object {
+
+        /**
+         * Key for image base URL from TMDb.
+         */
+        const val KEY_TMDB_IMAGE_BASE_URL = "TMDB_IMAGE_BASE_URL"
+
+        /**
+         * Key for the sizes of backdrop images from TMDb.
+         */
+        const val KEY_TMDB_BACKDROP_SIZES = "TMDB_BACKDROP_SIZES"
+
+        /**
+         * Key for the sizes of poster images from TMDb.
+         */
+        const val KEY_TMDB_POSTER_SIZES = "TMDB_POSTER_SIZES"
+    }
 }

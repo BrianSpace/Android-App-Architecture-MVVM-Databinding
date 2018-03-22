@@ -23,7 +23,6 @@ import android.os.StrictMode
 import com.github.brianspace.moviebrowser.di.components.AppComponent
 import com.github.brianspace.moviebrowser.di.components.DaggerAppComponent
 import com.github.brianspace.moviebrowser.di.modules.AppModule
-import com.github.brianspace.moviebrowser.repository.util.FileUtil
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -87,7 +86,6 @@ class MovieBrowserApplication : Application(), HasActivityInjector {
     private fun init() {
         appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
         appComponent.inject(this)
-        FileUtil.init(this)
     }
 
     // endregion

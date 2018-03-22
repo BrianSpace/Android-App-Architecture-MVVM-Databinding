@@ -14,33 +14,23 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.data;
+package com.github.brianspace.moviebrowser.repository.data
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
 
 /**
  * Language.
  */
-@SuppressWarnings("PMD.CommentRequired")
-public class Language {
+class Language {
+    /**
+     * The short language name in ISO 639-1 format.
+     * @see [List of ISO_639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+     */
     @SerializedName("iso_639_1")
-    private String shortName;
-    private String name;
+    val shortName: String? = null
 
     /**
-     * Get the short language name.
-     * @see <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">List of ISO_639-1 codes</a>
-     *
-     * @return the language name in ISO 639-1 format.
+     * The language name.
      */
-    public String getShortName() {
-        return shortName;
-    }
-
-    /**
-     * Get the language name.
-     */
-    public String getName() {
-        return name;
-    }
+    val name: String? = null
 }

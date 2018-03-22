@@ -14,33 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.data;
-
-import com.google.gson.annotations.SerializedName;
+package com.github.brianspace.moviebrowser.repository.data
 
 /**
- * Country.
+ * Movie genre.
  */
-@SuppressWarnings("PMD.CommentRequired")
-public class Country {
-    @SerializedName("iso_3166_1")
-    private String shortName;
-    private String name;
+class Genre {
+    /**
+     * Genre ID.
+     */
+    val id: Int = 0
 
     /**
-     * Get the short country name.
-     * @see <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a>
-
-     * @return the country name in ISO 3166-1 format.
+     * The name of the genre.
      */
-    public String getShortName() {
-        return shortName;
-    }
-
-    /**
-     * Get the country name.
-     */
-    public String getName() {
-        return name;
-    }
+    val name: String? = null
 }

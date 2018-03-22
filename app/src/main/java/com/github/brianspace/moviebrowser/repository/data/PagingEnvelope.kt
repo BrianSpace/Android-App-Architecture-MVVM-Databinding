@@ -14,19 +14,27 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.local.database;
-
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
+package com.github.brianspace.moviebrowser.repository.data
 
 /**
- * ROOM database class for favorite movies.
+ * Envelope for paged list result.
+ * @param <T> Type of the item in the paged list.
  */
-@Database(entities = {Favorite.class}, version = 1)
-public abstract class FavoriteDatabase extends RoomDatabase {
-
+class PagingEnvelope<T>(
     /**
-     * Get the DAO object for the database.
+     * The total number of pages.
      */
-    public abstract FavoriteDao getDao();
-}
+    val totalPages: Int,
+    /**
+     * The total number of result items.
+     */
+    val totalResults: Int,
+    /**
+     * The page number in the current page.
+     */
+    val page: Int,
+    /**
+     * The list of items in the current page.
+     */
+    val results: List<T>?
+)

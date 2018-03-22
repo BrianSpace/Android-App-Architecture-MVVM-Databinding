@@ -14,55 +14,55 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.web;
+package com.github.brianspace.moviebrowser.repository.web
 
-import com.github.brianspace.moviebrowser.repository.data.Configuration;
-import com.github.brianspace.moviebrowser.repository.data.MovieData;
-import com.github.brianspace.moviebrowser.repository.data.MovieDetailsData;
-import com.github.brianspace.moviebrowser.repository.data.PagingEnvelope;
-import io.reactivex.Single;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import com.github.brianspace.moviebrowser.repository.data.Configuration
+import com.github.brianspace.moviebrowser.repository.data.MovieData
+import com.github.brianspace.moviebrowser.repository.data.MovieDetailsData
+import com.github.brianspace.moviebrowser.repository.data.PagingEnvelope
+import io.reactivex.Single
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * The Movie DB (TMDb) Web API interface (for Retrofit).
- * @see <a href="https://developers.themoviedb.org/3">The Movie Database API</a>
+ * @see [The Movie Database API](https://developers.themoviedb.org/3)
  */
-interface IMovieDbApi {
+internal interface IMovieDbApi {
     /**
      * Get configuration (image base URL, image size, etc.).
      *
-     * @return RxJava {@code Single} for the configuration.
+     * @return RxJava `Single` for the configuration.
      */
-    @GET("configuration")
-    Single<Configuration> getConfiguration();
+    @get:GET("configuration")
+    val configuration: Single<Configuration>
 
     /**
      * Get the list of now playing movies.
      *
      * @param page the page number.
-     * @return RxJava {@code Single} for the page of movie list.
+     * @return RxJava `Single` for the page of movie list.
      */
     @GET("movie/now_playing")
-    Single<PagingEnvelope<MovieData>> getMovieNowPlaying(@Query("page") int page);
+    fun getMovieNowPlaying(@Query("page") page: Int): Single<PagingEnvelope<MovieData>>
 
     /**
      * Get extra details for a movie.
      *
      * @param id the ID of the movie to request for details.
-     * @return  RxJava {@code Single} for the details data.
+     * @return  RxJava `Single` for the details data.
      */
     @GET("movie/{id}")
-    Single<MovieDetailsData> getMovieDetails(@Path("id") int id);
+    fun getMovieDetails(@Path("id") id: Int): Single<MovieDetailsData>
 
     /**
      * Get the list of similar movies.
      *
      * @param id the ID of the movie to request for similar movies.
      * @param page the page number.
-     * @return RxJava {@code Single} for the page of movie list.
+     * @return RxJava `Single` for the page of movie list.
      */
     @GET("movie/{id}/similar")
-    Single<PagingEnvelope<MovieData>> getSimilarMovies(@Path("id") int id, @Query("page") int page);
+    fun getSimilarMovies(@Path("id") id: Int, @Query("page") page: Int): Single<PagingEnvelope<MovieData>>
 }

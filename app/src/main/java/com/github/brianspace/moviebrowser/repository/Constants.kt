@@ -14,32 +14,32 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository;
+package com.github.brianspace.moviebrowser.repository
 
-import com.github.brianspace.moviebrowser.BuildConfig;
+import com.github.brianspace.moviebrowser.BuildConfig
 
 /**
  * Constants for repository sub-module.
  */
-public class Constants {
+object Constants {
 
     /**
      * Cache size for the HTTP requests.
      */
-    public static final int HTTP_CACHE_SIZE = 10 * 1024 * 1024;
+    const val HTTP_CACHE_SIZE = 10 * 1024 * 1024
 
     /**
      * Database Name (for favorite movies).
      */
-    public static final String DATABASE_NAME = "MovieDB";
+    const val DATABASE_NAME = "MovieDB"
 
     /**
      * Timeout (in seconds) for connecting TMDb Web API. Use smaller value for debug mode.
      */
-    public static final int TMDB_API_TIMEOUT_CONNECT = BuildConfig.DEBUG ? 1 : 5;
+    val TMDB_API_TIMEOUT_CONNECT: Long = if (BuildConfig.DEBUG) 1 else 5
 
     /**
      * Timeout (in seconds) for reading from TMDb Web API. Use smaller value for debug mode.
      */
-    public static final int TMDB_API_TIMEOUT_READ = BuildConfig.DEBUG ? 1 : 5;
+    val TMDB_API_TIMEOUT_READ: Long = if (BuildConfig.DEBUG) 1 else 5
 }

@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.data;
+package com.github.brianspace.moviebrowser.repository.data
 
 /**
- * Movie genre.
+ * Movie company.
  */
-@SuppressWarnings("PMD.CommentRequired")
-public class Genre {
-    private int id;
-    private String name;
+class Company {
+    /**
+     * Get company ID.
+     */
+    val id: Int = 0
 
     /**
-     * Get genre ID.
+     * Get company name.
      */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Get the name of the genre.
-     */
-    public String getName() {
-        return name;
-    }
+    val name: String? = null
 }

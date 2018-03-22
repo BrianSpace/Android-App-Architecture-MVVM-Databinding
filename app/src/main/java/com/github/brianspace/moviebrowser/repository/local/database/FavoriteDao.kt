@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.local.database;
+package com.github.brianspace.moviebrowser.repository.local.database
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
-import android.arch.persistence.room.Query;
-import io.reactivex.Maybe;
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
+import android.arch.persistence.room.Query
+import io.reactivex.Maybe
 
 /**
  * ROOM DAO interface to access the favorite movies database records.
  */
 @Dao
-public interface FavoriteDao {
+interface FavoriteDao {
 
     /**
      * Insert a new favorite movie record.
@@ -35,24 +35,24 @@ public interface FavoriteDao {
      * @return the new rowId of the inserted item.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertFavorite(Favorite favorite);
+    fun insertFavorite(favorite: Favorite): Long
 
     /**
      * Load all favorite records.
      *
-     * @return The RxJava {@code Flowable} of all favorite movies.
+     * @return The RxJava `Flowable` of all favorite movies.
      */
     @Query("SELECT * FROM Favorite ORDER BY create_time DESC")
-    Favorite[] loadAllFavorites();
+    fun loadAllFavorites(): Array<Favorite>
 
     /**
      * Find the favorite movie record by ID.
      *
      * @param id the movie ID.
-     * @return RxJava {@code Single} of the movie.
+     * @return RxJava `Single` of the movie.
      */
     @Query("SELECT * FROM Favorite WHERE id IS :id")
-    Maybe<Favorite> findFavoriteById(long id);
+    fun findFavoriteById(id: Long): Maybe<Favorite>
 
     /**
      * Delete the favorite movie with specified ID.
@@ -61,5 +61,5 @@ public interface FavoriteDao {
      * @return number of rows deleted.
      */
     @Query("DELETE FROM Favorite WHERE id IS :id")
-    int deleteFavorite(long id);
+    fun deleteFavorite(id: Long): Int
 }

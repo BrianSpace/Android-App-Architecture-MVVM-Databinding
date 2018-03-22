@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.data;
+package com.github.brianspace.moviebrowser.repository.local.database
+
+import android.arch.persistence.room.Database
+import android.arch.persistence.room.RoomDatabase
 
 /**
- * Movie company.
+ * ROOM database class for favorite movies.
  */
-@SuppressWarnings("PMD.CommentRequired")
-public class Company {
-    private int id;
-    private String name;
+@Database(entities = [Favorite::class], version = 1)
+abstract class FavoriteDatabase : RoomDatabase() {
 
     /**
-     * Get company ID.
+     * Get the DAO object for the database.
      */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Get company name.
-     */
-    public String getName() {
-        return name;
-    }
+    abstract val dao: FavoriteDao
 }

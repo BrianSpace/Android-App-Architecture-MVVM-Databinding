@@ -17,14 +17,10 @@
 package com.github.brianspace.moviebrowser.di.components
 
 import com.github.brianspace.moviebrowser.MovieBrowserApplication
-import com.github.brianspace.moviebrowser.di.modules.AppModule
-import com.github.brianspace.moviebrowser.di.modules.FavoriteMovieListFragmentModule
-import com.github.brianspace.moviebrowser.di.modules.MainActivityModule
-import com.github.brianspace.moviebrowser.di.modules.MovieDetailsActivityModule
-import com.github.brianspace.moviebrowser.di.modules.NowPlayingMovieListFragmentModule
-import com.github.brianspace.moviebrowser.di.modules.SettingsFragmentModule
+import com.github.brianspace.moviebrowser.di.modules.*
 import com.github.brianspace.moviebrowser.models.ModelsModule
 import com.github.brianspace.moviebrowser.repository.local.LocalRepositoryModule
+import com.github.brianspace.moviebrowser.repository.util.DirUtilModule
 import com.github.brianspace.moviebrowser.repository.web.MovieDbServiceModule
 import com.github.brianspace.moviebrowser.viewmodels.ViewModelsModule
 import dagger.Component
@@ -42,7 +38,7 @@ import javax.inject.Singleton
     modules = [AndroidInjectionModule::class, AndroidSupportInjectionModule::class, AppModule::class,
         MainActivityModule::class, MovieDetailsActivityModule::class, NowPlayingMovieListFragmentModule::class,
         FavoriteMovieListFragmentModule::class, SettingsFragmentModule::class, ViewModelsModule::class,
-        ModelsModule::class, LocalRepositoryModule::class, MovieDbServiceModule::class]
+        ModelsModule::class, LocalRepositoryModule::class, MovieDbServiceModule::class, DirUtilModule::class]
 )
 interface AppComponent : AndroidInjector<MovieBrowserApplication> {
 
