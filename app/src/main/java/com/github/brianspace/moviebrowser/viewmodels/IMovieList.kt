@@ -14,59 +14,54 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.viewmodels;
+package com.github.brianspace.moviebrowser.viewmodels
 
-import android.databinding.Observable;
-import android.databinding.ObservableList;
-import android.support.annotation.NonNull;
-import io.reactivex.Completable;
+import android.databinding.Observable
+import android.databinding.ObservableList
+import io.reactivex.Completable
 
 /**
  * Interface for list of movie view models.
  */
-public interface IMovieList extends Observable {
+interface IMovieList : Observable {
 
     /**
      * Get if data is already loaded or not.
      */
-    boolean isLoaded();
+    val isLoaded: Boolean
 
     /**
      * Get loading state.
      */
-    boolean isLoading();
+    val isLoading: Boolean
 
     /**
      * Get the list of movie view models.
      * @return list of movie view models ready for data binding.
      */
-    @NonNull
-    ObservableList<MovieViewModel> getMovies();
+    val movies: ObservableList<MovieViewModel>
 
     /**
      * Load data.
-     * @return RxJava {@code Completable} result.
+     * @return RxJava `Completable` result.
      */
-    @NonNull
-    Completable load();
+    fun load(): Completable
 
     /**
      * Refresh data.
-     * @return RxJava {@code Completable} result.
+     * @return RxJava `Completable` result.
      */
-    @NonNull
-    Completable refresh();
+    fun refresh(): Completable
 
     /**
      * Check if the list has next page or not.
      * @return true if there is still a next page available, otherwise false.
      */
-    boolean hasNexPage();
+    fun hasNexPage(): Boolean
 
     /**
      * Load the next page.
-     * @return RxJava {@code Completable} result.
+     * @return RxJava `Completable` result.
      */
-    @NonNull
-    Completable loadNextPage();
+    fun loadNextPage(): Completable
 }

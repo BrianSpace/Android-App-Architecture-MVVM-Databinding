@@ -14,39 +14,33 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.viewmodels;
+package com.github.brianspace.moviebrowser.viewmodels
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import com.github.brianspace.moviebrowser.models.Movie;
+import com.github.brianspace.moviebrowser.models.Movie
 
 /**
  * Interface for view model object store.
  */
-public interface IViewModelFactory {
+interface IViewModelFactory {
 
     /**
      * Create a new movie view model from the supplied model.
      * @param movie Model layer movie object.
      * @return the corresponding movie view model.
      */
-    @NonNull
-    MovieViewModel createMovieViewModel(@NonNull Movie movie);
+    fun createMovieViewModel(movie: Movie): MovieViewModel
 
     /**
      * Get a movie view model by the ID.
      * @param id ID of the movie to request for.
      * @return the corresponding movie view model, or null if not found.
      */
-    @Nullable
-    MovieViewModel createMovieViewModelById(int id);
+    fun createMovieViewModelById(id: Int): MovieViewModel?
 
     /**
      * Get a movie details view model by the ID.
      * @param id ID of the movie to request for.
      * @return the corresponding movie details view model, or null if not found.
      */
-    @Nullable
-    MovieDetailsViewModel createMovieDetailsViewModelById(int id);
+    fun createMovieDetailsViewModelById(id: Int): MovieDetailsViewModel?
 }
