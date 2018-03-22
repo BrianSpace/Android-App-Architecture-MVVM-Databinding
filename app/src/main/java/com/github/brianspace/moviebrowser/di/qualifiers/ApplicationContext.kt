@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.di.qualifiers;
+package com.github.brianspace.moviebrowser.di.qualifiers
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import javax.inject.Qualifier;
+import javax.inject.Qualifier
 
 /**
- * Dependency injection qualifier for activity context.
+ * Dependency injection qualifier for application context.
  */
 @Qualifier
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ActivityContext {
-}
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ApplicationContext

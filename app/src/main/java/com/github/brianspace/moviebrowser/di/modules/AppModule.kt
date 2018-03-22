@@ -14,39 +14,27 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.di.modules;
+package com.github.brianspace.moviebrowser.di.modules
 
-import android.app.Application;
-import android.content.Context;
-import com.github.brianspace.moviebrowser.di.qualifiers.ApplicationContext;
-import dagger.Module;
-import dagger.Provides;
+import android.app.Application
+import android.content.Context
+import com.github.brianspace.moviebrowser.di.qualifiers.ApplicationContext
+import dagger.Module
+import dagger.Provides
 
 /**
  * Dagger module for the application.
+ * @param application the application instance.
  */
 @Module
-public class AppModule {
-
-    /**
-     * Application instance.
-     */
-    private final Application application;
-
-    /**
-     * Constructor for AppModule.
-     * @param application the application instance.
-     */
-    public AppModule(final Application application) {
-        this.application = application;
-    }
+class AppModule(private val application: Application) {
 
     /**
      * Provide application context.
      */
     @Provides
     @ApplicationContext
-    public Context provideAppContext() {
-        return application;
+    fun provideAppContext(): Context {
+        return application
     }
 }
