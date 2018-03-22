@@ -25,7 +25,6 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import com.github.brianspace.common.observable.IObserver;
-import com.github.brianspace.common.util.Assertion;
 import com.github.brianspace.databinding.message.IMessageSource;
 import com.github.brianspace.databinding.message.MessageSource;
 import com.github.brianspace.moviebrowser.BR;
@@ -88,9 +87,9 @@ public class MovieViewModel extends BaseObservable {
      */
     /* default */ MovieViewModel(@NonNull final Movie movie, @NonNull final IImageConfig imageConfig,
             @NonNull final IFavoriteMovieCollection favoriteMovieCollection) {
-        this.movie = Assertion.notNull(movie);
-        this.imageConfig = Assertion.notNull(imageConfig);
-        this.favoriteMovieCollection = Assertion.notNull(favoriteMovieCollection);
+        this.movie = movie;
+        this.imageConfig = imageConfig;
+        this.favoriteMovieCollection = favoriteMovieCollection;
 
         movie.addObserver(itemObserver);
     }

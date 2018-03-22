@@ -100,7 +100,7 @@ public class MovieDetailsActivity extends DaggerAppCompatActivity {
         @Override
         public long getItemId(final int position) {
             // Use 0 as the fixed ID for the header item.
-            return position == 0 ? 0 : adapterItems.get(position - 1).getId();
+            return position == 0 ? 0 : getAdapterItems().get(position - 1).getId();
         }
     }
 

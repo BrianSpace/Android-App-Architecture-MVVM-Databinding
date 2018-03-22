@@ -14,31 +14,22 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.databinding.message;
+package com.github.brianspace.databinding.message
 
-import android.support.annotation.StringRes;
+import android.support.annotation.StringRes
 
 /**
- * Interface for the message source.
+ * Implementation class for displaying messages with [IMessageSource].
  */
-public interface IMessageSource {
+class MessageSource(
+    /**
+     * Resource ID of the message string to be displayed.
+     */
+    @param:StringRes
+    override val messageId: Int,
 
     /**
-     * The type of the message.
+     * Type of the message.
      */
-    enum Type {
-        NOTIFICATION,
-        ERROR
-    }
-
-    /**
-     * Get the resource ID of the message string to be displayed.
-     */
-    @StringRes
-    int getMessageId();
-
-    /**
-     * Get the message type.
-     */
-    Type getType();
-}
+    override val type: IMessageSource.Type
+) : IMessageSource

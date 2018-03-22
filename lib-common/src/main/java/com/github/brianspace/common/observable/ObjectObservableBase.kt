@@ -14,35 +14,33 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.common.observable;
-
-import android.support.annotation.Nullable;
+package com.github.brianspace.common.observable
 
 /**
  * Base class for a single observable object.
  */
-public class ObjectObservableBase extends WeakObservable<IObserver> {
+open class ObjectObservableBase : WeakObservable<IObserver>() {
 
     /**
-     * If {@code hasChanged()} returns {@code true}, calls the {@code onUpdate()}
+     * If `hasChanged()` returns `true`, calls the `onUpdate()`
      * method for every observer in the list of observers using null as the
-     * argument. Afterwards, calls {@code clearChanged()}.
+     * argument. Afterwards, calls `clearChanged()`.
      *
-     * <p>Equivalent to calling {@code notifyObservers(null)}.
+     *
+     * Equivalent to calling `notifyObservers(null)`.
      */
-    protected void notifyObservers() {
-        notifyObservers(null);
+    protected fun notifyObservers() {
+        notifyObservers(null)
     }
 
     /**
-     * If {@code hasChanged()} returns {@code true}, calls the {@code onUpdate()}
+     * If `hasChanged()` returns `true`, calls the `onUpdate()`
      * method for every Observer in the list of observers using the specified
-     * argument. Afterwards calls {@code clearChanged()}.
+     * argument. Afterwards calls `clearChanged()`.
      *
-     * @param data the argument passed to {@code onUpdate()}.
+     * @param data the argument passed to `onUpdate()`.
      */
-    @SuppressWarnings("unchecked")
-    protected void notifyObservers(@Nullable final Object data) {
-        foreachObserver(observer -> observer.onUpdate(this, data));
+    protected fun notifyObservers(data: Any?) {
+        foreachObserver { it.onUpdate(this, data) }
     }
 }

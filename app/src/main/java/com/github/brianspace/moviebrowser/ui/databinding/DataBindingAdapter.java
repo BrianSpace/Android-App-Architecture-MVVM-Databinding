@@ -27,6 +27,7 @@ import com.github.brianspace.moviebrowser.R;
 import com.github.brianspace.moviebrowser.viewmodels.MovieDetailsViewModel;
 import com.github.brianspace.moviebrowser.viewmodels.MovieViewModel;
 import com.github.brianspace.utils.ImageLoader;
+import com.github.brianspace.utils.ImageLoaderKt;
 
 /**
  * Data binding adapters (for custom attribute setters used in layout files).
@@ -75,7 +76,7 @@ public final class DataBindingAdapter {
      */
     @BindingAdapter({"imageUrl"})
     public static void loadImage(final ImageView view, final String url) {
-        ImageLoader.loadImage(view, url);
+        ImageLoaderKt.loadImage(view, url);
     }
 
     /**

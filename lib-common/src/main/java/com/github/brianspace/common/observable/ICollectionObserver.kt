@@ -14,38 +14,34 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.common.observable;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import java.util.List;
+package com.github.brianspace.common.observable
 
 /**
  * Interface for observers on a collection.
  */
-public interface ICollectionObserver {
+interface ICollectionObserver {
 
     /**
      * The action on the collection.
      */
-    enum Action {
+    enum class Action {
         Clear,          // Collection cleared.
         AppendItem,     // Append an item to the end.
         AppendRange,    // Append a list to the end.
         AddItemToFront, // Add item to the front.
         RemoveItem,     // Remove item.
-        UpdateItem,     // Update item.
+        UpdateItem      // Update item.
     }
 
     /**
-     * When {@code IObservable} object changes, {@code WeakObservable#notifyObservers} will be called and this method of
+     * When `IObservable` object changes, `WeakObservable#notifyObservers` will be called and this method of
      * each observer will be called.
      *
-     * @param observable    {@link IObservable} instance.
-     * @param action        {@link Action} happened.
-     * @param item          Item in the collection which was modified (RemoveItem, UpdateItem).
+     * @param observable    [IObservable] instance.
+     * @param action        [Action] happened.
+     * @param item          Item in the collection which was modified
+     *                      (AppendItem, AddItemToFront, RemoveItem, UpdateItem).
      * @param range         The range changed (AppendRange).
      */
-    void onUpdate(@NonNull IObservable<ICollectionObserver> observable, @NonNull Action action, @Nullable Object item,
-            @Nullable List<Object> range);
+    fun onUpdate(observable: IObservable<ICollectionObserver>, action: Action, item: Any?, range: List<Any>?)
 }

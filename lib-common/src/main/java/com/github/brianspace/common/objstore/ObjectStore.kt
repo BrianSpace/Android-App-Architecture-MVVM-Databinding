@@ -14,32 +14,29 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.common.objstore;
+package com.github.brianspace.common.objstore
 
-import android.support.annotation.Nullable;
-import android.util.SparseArray;
-import java.lang.ref.WeakReference;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import android.util.SparseArray
+import java.lang.ref.WeakReference
+import java.util.concurrent.locks.ReentrantReadWriteLock
 
 /**
  * Object store, which ensures that only one object will be associated with one key.
  * @param <T>  Type of the entity class.
  */
-public class ObjectStore<T> {
+open class ObjectStore<T> {
     // region Protected Fields
 
     /**
      * Array of weak reference to the cached objects.
      */
-    @SuppressWarnings("WeakerAccess")
-    protected final SparseArray<WeakReference<T>> cache = new SparseArray<>();
+    protected val cache = SparseArray<WeakReference<T>>()
 
     /**
      * Lock for concurrent read/write.
      * Can be replaced by StampedLock in the future.
      */
-    @SuppressWarnings("WeakerAccess")
-    protected final ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
+    protected val rwLock = ReentrantReadWriteLock()
 
     // endregion
 
@@ -50,34 +47,33 @@ public class ObjectStore<T> {
      * @param key the key
      * @return the model matching the key, or null if not found.
      */
-    @Nullable
-    public T find(final int key) {
-        rwLock.readLock().lock(); // Read lock
+    fun find(key: Int): T? {
+        rwLock.readLock().lock() // Read lock
         try {
-            final WeakReference<T> found = cache.get(key);
+            val found = cache.get(key)
             if (found != null) {
-                final T item = found.get();
+                val item = found.get()
                 if (item != null) {
-                    return item;
+                    return item
                 }
 
                 // Reference need to be cleared.
                 // Upgrade to write lock
-                rwLock.readLock().unlock();
-                rwLock.writeLock().lock();
+                rwLock.readLock().unlock()
+                rwLock.writeLock().lock()
                 try {
-                    cache.delete(key);
+                    cache.delete(key)
                 } finally {
                     // Downgrade to read lock
-                    rwLock.readLock().lock();
-                    rwLock.writeLock().unlock();
+                    rwLock.readLock().lock()
+                    rwLock.writeLock().unlock()
                 }
             }
         } finally {
-            rwLock.readLock().unlock();
+            rwLock.readLock().unlock()
         }
 
-        return null;
+        return null
     }
 
     // endregion

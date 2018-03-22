@@ -23,7 +23,6 @@ import android.databinding.ObservableList;
 import android.support.annotation.NonNull;
 import com.github.brianspace.common.observable.ICollectionObserver;
 import com.github.brianspace.common.observable.IObservable;
-import com.github.brianspace.common.util.Assertion;
 import com.github.brianspace.moviebrowser.BR;
 import com.github.brianspace.moviebrowser.models.IMovieCollection;
 import com.github.brianspace.moviebrowser.models.Movie;
@@ -83,7 +82,7 @@ class MoviesViewModel extends BaseObservable implements IMovieList {
         @SuppressWarnings({"PMD.NcssCount", "PMD.CyclomaticComplexity"}) // Simple switch cases.
         @Override
         public void onUpdate(final IObservable<ICollectionObserver> observable, final Action action, final Object item,
-                final List<Object> range) {
+                final List<?> range) {
             switch (action) {
                 case Clear:
                     if (!movies.isEmpty()) {
@@ -147,8 +146,8 @@ class MoviesViewModel extends BaseObservable implements IMovieList {
      */
     /* default */ MoviesViewModel(@NonNull final IMovieCollection movieCollection,
             @NonNull final IViewModelFactory viewModelFactory) {
-        this.movieCollection = Assertion.notNull(movieCollection);
-        this.viewModelFactory = Assertion.notNull(viewModelFactory);
+        this.movieCollection = movieCollection;
+        this.viewModelFactory = viewModelFactory;
 
         movieCollection.addObserver(movieListObserver);
     }

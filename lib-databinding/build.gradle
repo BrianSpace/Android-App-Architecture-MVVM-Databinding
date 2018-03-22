@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply from: '../analysis/quality/static_analysis.gradle'
 
 android {
@@ -32,6 +34,11 @@ android {
 }
 
 dependencies {
+    implementation KOTLIN_STDLIB
+
+    // Databinding compiler
+    kapt DATABINDING_COMPILER
+
     testImplementation LIB_JUNIT
     androidTestImplementation LIB_JUNIT
     androidTestImplementation project.LIB_SUPPORT_ANNOTATIONS

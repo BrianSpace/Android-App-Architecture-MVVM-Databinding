@@ -1,6 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.KOTLIN_VERSION = '1.2.30'
+    ext.ANDROID_PLUGIN_VERSION = '3.0.1'
     repositories {
         jcenter()
         google()
@@ -8,6 +10,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
     }
 }
 
@@ -33,8 +36,14 @@ project.ext {
     MIN_SDK_VERSION = 15
     TARGET_SDK_VERSION = 27
     COMPILE_SDK_VERSION = 27
+
     BUILD_TOOLS_VERSION = "27.0.3"
     SUPPORT_LIBRARY_VERSION = "27.0.2"
+
+    KOTLIN_STDLIB = 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:' + KOTLIN_VERSION
+    KOTLIN_REFLECT = 'org.jetbrains.kotlin:kotlin-reflect:' + KOTLIN_VERSION
+
+    DATABINDING_COMPILER = 'com.android.databinding:compiler:' + ANDROID_PLUGIN_VERSION
 
     LIB_SUPPORT_V4 = 'com.android.support:support-v4:' + SUPPORT_LIBRARY_VERSION
     LIB_SUPPORT_V13 = 'com.android.support:support-v13:' + SUPPORT_LIBRARY_VERSION
@@ -55,4 +64,26 @@ project.ext {
     // URI constants for navigation:
     URI_SCHEME = 'bsmb'
     URI_HOST = 'bsmb.brianspace.github.com'
+
+    LINT_OPTIONS = {
+        // Turn off analysis progress reporting by lint
+        quiet true
+        // Stop the gradle build if errors are found
+        abortOnError true
+        // Do not ignore lint warnings
+        ignoreWarnings false
+        // Treat warnings as errors
+        warningsAsErrors true
+
+        // Write log to console
+        textReport true
+        textOutput "stdout"
+
+        // Disabled rules
+        disable 'IconMissingDensityFolder'
+        disable 'UnusedResources' // This rule cannot find references in Kotlin files.
+
+        // Ignore rules list
+        ignore 'ObsoleteLintCustomCheck' // 'butterknife.lint.InvalidR2UsageDetector'
+    }
 }

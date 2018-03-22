@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.common.observable;
-
-import android.support.annotation.NonNull;
+package com.github.brianspace.common.observable
 
 /**
  * Interface for observable objects.
  *
  * @param <ObserverT> Type of the observers.
  */
-public interface IObservable<ObserverT> {
+interface IObservable<ObserverT> {
 
     /**
      * Adds the specified observer to the list of observers. If it is already registered, it is not added a second time.
@@ -31,24 +29,24 @@ public interface IObservable<ObserverT> {
      *
      * @param observer the Observer to add.
      */
-    void addObserver(@NonNull ObserverT observer);
+    fun addObserver(observer: ObserverT)
 
     /**
      * Removes the specified observer from the list of observers. Passing null won't do anything.
      *
      * @param observer the observer to remove.
      */
-    void deleteObserver(@NonNull ObserverT observer);
+    fun deleteObserver(observer: ObserverT)
 
     /**
      * Removes all observers from the list of observers.
      */
-    void deleteObservers();
+    fun deleteObservers()
 
     /**
-     * Returns the changed flag for this {@code Observable}.
+     * Returns the changed flag for this `Observable`.
      *
-     * @return {@code true} when the changed flag for this {@code Observable} is set, {@code false} otherwise.
+     * @return `true` when the changed flag for this `Observable` is set, `false` otherwise.
      */
-    boolean hasChanged();
+    fun hasChanged(): Boolean
 }

@@ -14,27 +14,21 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.common.observable;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import java.util.List;
+package com.github.brianspace.common.observable
 
 /**
  * Base class for the collection which is observable for changes in the list.
  */
-public class CollectionObservableBase extends WeakObservable<ICollectionObserver> {
+open class CollectionObservableBase : WeakObservable<ICollectionObserver>() {
 
     /**
      * Notify observers for the change in the list.
      *
-     * @param action    {@code ICollectionObserver.Action} on the list.
+     * @param action    `ICollectionObserver.Action` on the list.
      * @param item      the item that changed.
      * @param range     the range of items that changed.
      */
-    @SuppressWarnings("unchecked")
-    protected void notifyObservers(@NonNull final ICollectionObserver.Action action, @Nullable final Object item,
-            @Nullable final List<Object> range) {
-        foreachObserver(observer -> observer.onUpdate(this, action, item, range));
+    protected fun notifyObservers(action: ICollectionObserver.Action, item: Any?, range: List<Any>?) {
+        foreachObserver { it.onUpdate(this, action, item, range) }
     }
 }

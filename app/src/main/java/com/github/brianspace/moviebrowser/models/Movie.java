@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.github.brianspace.common.objstore.IEntity;
 import com.github.brianspace.common.observable.ObjectObservableBase;
-import com.github.brianspace.common.util.Assertion;
 import com.github.brianspace.moviebrowser.BuildConfig;
 import com.github.brianspace.moviebrowser.repository.IMovieDbService;
 import com.github.brianspace.moviebrowser.repository.data.MovieData;
@@ -122,7 +121,7 @@ public class Movie extends ObjectObservableBase implements IEntity {
         private final MovieDetailsData detailsData;
 
         /* default */ Details(@NonNull final MovieDetailsData details) {
-            detailsData = Assertion.notNull(details);
+            detailsData = details;
         }
 
         /**
@@ -146,13 +145,13 @@ public class Movie extends ObjectObservableBase implements IEntity {
                     "DO NOT create a different instance for the same ID!");
         }
 
-        this.movieDbService = Assertion.notNull(movieDbService);
-        this.movieData = Assertion.notNull(movie);
+        this.movieDbService = movieDbService;
+        this.movieData = movie;
 
         posterPath = getValidImagePath(movie.getPosterPath());
         backdropPath = getValidImagePath(movie.getBackdropPath());
 
-        this.similarMovies = new SimilarMovies(movieDbService, Assertion.notNull(entityStore));
+        this.similarMovies = new SimilarMovies(movieDbService, entityStore);
     }
 
     // endregion

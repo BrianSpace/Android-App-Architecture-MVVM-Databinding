@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.common.objstore;
+package com.github.brianspace.common.observable
 
 /**
- * Interface for all entities.
+ * Interface for observers.
  */
-public interface IEntity {
-
+interface IObserver {
     /**
-     * Get entity ID.
+     * When `IObservable` object changes, `WeakObservable#notifyObservers` will be called and this method of
+     * each observer will be called.
+     *
+     * @param observable    [IObservable] instance.
+     * @param data          Object passed to [ObjectObservableBase.notifyObservers] when a specific item
+     *                      in a collection changed.
      */
-    int getId();
+    fun onUpdate(observable: IObservable<IObserver>, data: Any?)
 }

@@ -149,7 +149,7 @@ public class MovieListView extends FrameLayout {
 
         @Override
         public long getItemId(final int position) {
-            return adapterItems.get(position).getId();
+            return getAdapterItems().get(position).getId();
         }
     }
 

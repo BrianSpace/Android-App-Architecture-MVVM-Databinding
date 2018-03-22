@@ -14,23 +14,31 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.common.util;
+package com.github.brianspace.databinding.message
 
-import android.support.annotation.NonNull;
+import android.support.annotation.StringRes
 
 /**
- * A functional interface that takes a value and returns another value, possibly with a different type.
- *
- * @param <T> the input value type
- * @param <R> the output value type
+ * Interface for the message source.
  */
-public interface Function<T, R> {
+interface IMessageSource {
 
     /**
-     * Apply some calculation to the input value and return some other value.
-     *
-     * @param t the input value
-     * @return the output value
+     * Get the resource ID of the message string to be displayed.
      */
-    R apply(@NonNull T t);
+    @get:StringRes
+    val messageId: Int
+
+    /**
+     * Get the message type.
+     */
+    val type: Type
+
+    /**
+     * The type of the message.
+     */
+    enum class Type {
+        NOTIFICATION,
+        ERROR
+    }
 }
