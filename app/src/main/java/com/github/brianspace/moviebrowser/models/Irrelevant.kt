@@ -14,25 +14,11 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.models;
+package com.github.brianspace.moviebrowser.models
 
 /**
- * Constants for model layer.
+ * Used as return value for Observable&lt;Object&gt;.
  */
-class Constants {
-
-    /**
-     * Constants: backslash.
-     */
-    /* default */ static final String BACK_SLASH = "/";
-
-    /**
-     * Default image base URL for TMDb images.
-     */
-    /* default */ static final String DEFAULT_IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
-
-    /**
-     * Default image path in the URL, use original image size.
-     */
-    /* default */ static final String DEFAULT_IMAGE_PATH = DEFAULT_IMAGE_BASE_URL + "original/";
+enum class Irrelevant {
+    INSTANCE
 }

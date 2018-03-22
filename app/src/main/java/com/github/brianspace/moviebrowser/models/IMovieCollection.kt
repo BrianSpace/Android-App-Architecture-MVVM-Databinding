@@ -14,60 +14,54 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.models;
+package com.github.brianspace.moviebrowser.models
 
-import android.support.annotation.NonNull;
-import com.github.brianspace.common.observable.ICollectionObserver;
-import com.github.brianspace.common.observable.IObservable;
-import io.reactivex.Completable;
-import java.util.List;
+import com.github.brianspace.common.observable.ICollectionObserver
+import com.github.brianspace.common.observable.IObservable
+import io.reactivex.Completable
 
 /**
  * Interface for paged observable movie list.
  */
-public interface IMovieCollection extends IObservable<ICollectionObserver> {
+interface IMovieCollection : IObservable<ICollectionObserver> {
 
     /**
      * State of data loading.
      * @return true if is data is ready, otherwise false.
      */
-    boolean isLoaded();
+    val isLoaded: Boolean
 
     /**
      * State of loading.
      * @return true if is loading data, otherwise false.
      */
-    boolean isLoading();
+    val isLoading: Boolean
 
     /**
      * Get the list of movies.
      */
-    @NonNull
-    List<Movie> getMovies();
+    val movies: List<Movie>
 
     /**
      * Load the list.
-     * @return RxJava {@code Completable}.
+     * @return RxJava `Completable`.
      */
-    @NonNull
-    Completable load();
+    fun load(): Completable
 
     /**
      * Refresh the list.
-     * @return RxJava {@code Completable}.
+     * @return RxJava `Completable`.
      */
-    @NonNull
-    Completable refresh();
+    fun refresh(): Completable
 
     /**
      * Whether there is still a next page or not.
      */
-    boolean hasNexPage();
+    fun hasNexPage(): Boolean
 
     /**
      * Load next page.
-     * @return RxJava {@code Completable}.
+     * @return RxJava `Completable`.
      */
-    @NonNull
-    Completable loadNextPage();
+    fun loadNextPage(): Completable
 }

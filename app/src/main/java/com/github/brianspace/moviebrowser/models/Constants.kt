@@ -14,11 +14,25 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.models;
+package com.github.brianspace.moviebrowser.models
 
 /**
- * Used as return value for Observable&lt;Object&gt;.
+ * Constants for model layer.
  */
-public enum Irrelevant {
-    INSTANCE;
+internal object Constants {
+
+    /**
+     * Constants: backslash.
+     */
+    const val BACK_SLASH = "/"
+
+    /**
+     * Default image base URL for TMDb images.
+     */
+    const val DEFAULT_IMAGE_BASE_URL = "http://image.tmdb.org/t/p/"
+
+    /**
+     * Default image path in the URL, use original image size.
+     */
+    const val DEFAULT_IMAGE_PATH = DEFAULT_IMAGE_BASE_URL + "original/"
 }

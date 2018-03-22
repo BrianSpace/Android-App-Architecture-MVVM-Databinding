@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.models;
+package com.github.brianspace.moviebrowser.models
 
 /**
  * Interface for image configuration.
  * Different image type supplies different set of image widths.
  */
-public interface IImageConfig {
+interface IImageConfig {
 
     /**
      * Get the base URL of the movie backdrop images for a specified width.
      */
-    String getBackdropBaseUrl(int width);
+    fun getBackdropBaseUrl(width: Int): String
 
     /**
      * Get the base URL of the poster images for a specified width.
      */
-    String getPosterBaseUrl(int width);
+    fun getPosterBaseUrl(width: Int): String
 }

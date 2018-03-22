@@ -14,33 +14,27 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.models;
+package com.github.brianspace.moviebrowser.models
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import com.github.brianspace.moviebrowser.repository.data.MovieData;
-import javax.inject.Singleton;
+import com.github.brianspace.moviebrowser.repository.data.MovieData
 
 /**
  * Interface for model layer entities store.
  * The store is used to access model layer objects and it ensures the uniqueness of model entities.
  */
-@Singleton
-public interface IEntityStore {
+interface IEntityStore {
 
     /**
      * Find or create movie model from the data layer movie object.
      * @param movieData data layer movie object
      * @return model matching the data layer movie object.
      */
-    @NonNull
-    Movie getMovieModel(@NonNull MovieData movieData);
+    fun getMovieModel(movieData: MovieData): Movie
 
     /**
      * Find movie model object by ID.
      * @param id the movie ID
      * @return the movie model matching the ID, or null if not found.
      */
-    @Nullable
-    Movie findMovieById(int id);
+    fun findMovieById(id: Int): Movie?
 }

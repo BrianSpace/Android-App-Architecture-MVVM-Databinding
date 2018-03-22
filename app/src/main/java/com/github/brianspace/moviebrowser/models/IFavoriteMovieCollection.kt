@@ -14,32 +14,29 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.models;
+package com.github.brianspace.moviebrowser.models
 
-import android.support.annotation.NonNull;
-import io.reactivex.Single;
+import io.reactivex.Single
 
 /**
  * Interface for favorite movie list.
  */
-public interface IFavoriteMovieCollection extends IMovieCollection {
+interface IFavoriteMovieCollection : IMovieCollection {
 
     /**
      * Add the movie to favorites.
      *
      * @param movie the movie model.
-     * @return RxJava {@code Single} result.
+     * @return RxJava `Single` result.
      */
-    @NonNull
-    Single<Boolean> addToFavorite(@NonNull final Movie movie);
+    fun addToFavorite(movie: Movie): Single<Boolean>
 
 
     /**
      * Remove the movie from favorites.
      *
      * @param movie the movie model.
-     * @return RxJava {@code Single} result.
+     * @return RxJava `Single` result.
      */
-    @NonNull
-    Single<Boolean> removeFromFavorite(@NonNull final Movie movie);
+    fun removeFromFavorite(movie: Movie): Single<Boolean>
 }

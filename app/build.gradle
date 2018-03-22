@@ -89,6 +89,9 @@ dependencies {
     // Unit test framework for Android SDK in normal JVM. https://github.com/robolectric/robolectric/
     testImplementation 'org.robolectric:robolectric:3.7.1'
 
+    // Mockito for Kotlin https://github.com/nhaarman/mockito-kotlin
+    testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
+
     // DexMaker (needed by Mockito)
     androidTestImplementation "com.linkedin.dexmaker:dexmaker:2.12.1"
     androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
