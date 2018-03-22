@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.ui.fragment;
+package com.github.brianspace.moviebrowser.ui.fragment
 
-import com.github.brianspace.moviebrowser.viewmodels.IMovieList;
-import javax.inject.Inject;
-import javax.inject.Named;
+import com.github.brianspace.moviebrowser.viewmodels.IMovieList
+import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * Fragment to show the now playing movies.
  */
-public class NowPlayingMovieListFragment extends MovieListFragment {
+class NowPlayingMovieListFragment : MovieListFragment() {
 
     /**
      * The view model of now playing movie list.
      */
     @Inject
-    @Named("NowPlaying")
-    /* default */ IMovieList nowPlayingMoviesViewModel;
+    @field:Named("NowPlaying") // https://github.com/google/dagger/issues/761
+    internal lateinit var nowPlayingMoviesViewModel: IMovieList
 
-    @Override
-    protected IMovieList getMovieList() {
-        return nowPlayingMoviesViewModel;
+    override fun getMovieList(): IMovieList {
+        return nowPlayingMoviesViewModel
     }
 }

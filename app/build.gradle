@@ -117,10 +117,6 @@ dependencies {
     kapt 'com.google.dagger:dagger-android-processor:2.14.1'
     kapt 'com.google.dagger:dagger-compiler:2.14.1'
 
-    // View binding https://github.com/JakeWharton/butterknife
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
-
     // Retrofit REST client http://square.github.io/retrofit/
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'

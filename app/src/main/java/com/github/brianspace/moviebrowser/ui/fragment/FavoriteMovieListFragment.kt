@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.ui.fragment;
+package com.github.brianspace.moviebrowser.ui.fragment
 
-import com.github.brianspace.moviebrowser.viewmodels.IMovieList;
-import javax.inject.Inject;
-import javax.inject.Named;
+import com.github.brianspace.moviebrowser.viewmodels.IMovieList
+import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * Fragment to show favorite movies.
  */
-public class FavoriteMovieListFragment extends MovieListFragment {
+class FavoriteMovieListFragment : MovieListFragment() {
 
     /**
      * The view model of favorite movie list.
      */
     @Inject
-    @Named("Favorites")
-    /* default */ IMovieList favoritesViewModel;
+    @field:Named("Favorites") // https://github.com/google/dagger/issues/761
+    internal lateinit var favoritesViewModel: IMovieList
 
-    @Override
-    protected IMovieList getMovieList() {
-        return favoritesViewModel;
+    override fun getMovieList(): IMovieList {
+        return favoritesViewModel
     }
 }

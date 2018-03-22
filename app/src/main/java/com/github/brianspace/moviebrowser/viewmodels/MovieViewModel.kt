@@ -29,7 +29,7 @@ import com.github.brianspace.moviebrowser.BR
 import com.github.brianspace.moviebrowser.models.IFavoriteMovieCollection
 import com.github.brianspace.moviebrowser.models.IImageConfig
 import com.github.brianspace.moviebrowser.models.Movie
-import com.github.brianspace.moviebrowser.ui.nav.NavigationHelper
+import com.github.brianspace.moviebrowser.ui.nav.navigateToMovieDetails
 
 /**
  * View model for movie item.
@@ -129,7 +129,7 @@ internal constructor(
      * Click handler for the movie item.
      */
     fun onClickItem(view: View) {
-        NavigationHelper.navigateToMovieDetails(view.context, movie.id)
+        view.context.navigateToMovieDetails(movie.id)
     }
 
     // endregion
