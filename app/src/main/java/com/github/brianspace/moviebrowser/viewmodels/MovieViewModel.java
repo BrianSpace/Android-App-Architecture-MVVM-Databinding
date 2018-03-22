@@ -100,6 +100,13 @@ public class MovieViewModel extends BaseObservable {
     // region Public Methods
 
     /**
+     * Get the movie ID.
+     */
+    public int getId() {
+        return movie.getId();
+    }
+
+    /**
      * Get the URL of the movie poster image.
      */
     @Nullable

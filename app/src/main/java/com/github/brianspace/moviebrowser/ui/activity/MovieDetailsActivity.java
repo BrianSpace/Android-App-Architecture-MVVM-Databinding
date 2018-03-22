@@ -19,7 +19,9 @@ package com.github.brianspace.moviebrowser.ui.activity;
 import static android.widget.Toast.LENGTH_LONG;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableList;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -73,6 +75,34 @@ public class MovieDetailsActivity extends DaggerAppCompatActivity {
      * Save subscriptions for unsubscribing during onDestroy().
      */
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    // endregion
+
+    // region Private Inner Types
+
+    /**
+     * RecyclerView adapter for similar movies.
+     */
+    private static class SimilarMoviesAdapter extends HeaderedRecyclerViewDatabindingAdapter<MovieViewModel> {
+
+        /**
+         * Constructor for HeaderedRecyclerViewDatabindingAdapter.
+         *
+         * @param itemList Observable item list.
+         * @param headerParams Parameters for the list header.
+         */
+        /* default */ SimilarMoviesAdapter(@NonNull final ObservableList<MovieViewModel> itemList,
+                final HeaderedRecyclerViewDatabindingAdapter.HeaderParams headerParams) {
+            super(itemList, BR.movie, R.layout.item_poster, headerParams);
+            setHasStableIds(true);
+        }
+
+        @Override
+        public long getItemId(final int position) {
+            // Use 0 as the fixed ID for the header item.
+            return position == 0 ? 0 : adapterItems.get(position - 1).getId();
+        }
+    }
 
     // endregion
 
@@ -163,6 +193,7 @@ public class MovieDetailsActivity extends DaggerAppCompatActivity {
         binding.setMovie(movie);
         compositeDisposable.add(movie.loadDetails().subscribe(Functions.EMPTY_ACTION,
                 err -> { // onError
+                    Log.w(TAG, "showMovieDetails onError: " + err.toString());
                     Toast.makeText(this, R.string.error_fetch_movie_details, LENGTH_LONG).show();
                 }));
 
@@ -174,13 +205,13 @@ public class MovieDetailsActivity extends DaggerAppCompatActivity {
         final HeaderedRecyclerViewDatabindingAdapter.HeaderParams headerParams =
                 new HeaderedRecyclerViewDatabindingAdapter.HeaderParams(R.layout.view_movie_details_header,
                         BR.movie, movie);
-        final HeaderedRecyclerViewDatabindingAdapter<MovieViewModel> similarMoviesAdapter =
-                new HeaderedRecyclerViewDatabindingAdapter<>(similarMovies.getMovies(), BR.movie,
-                        R.layout.item_poster, headerParams);
+        final SimilarMoviesAdapter similarMoviesAdapter =
+                new SimilarMoviesAdapter(similarMovies.getMovies(), headerParams);
         binding.similarMovieList.setAdapter(similarMoviesAdapter);
 
         final Action onComplete = () -> binding.swipeRefresh.setRefreshing(false);
         final Consumer<? super Throwable> onError = err -> {
+            Log.w(TAG, "loadSimilarMovies onError: " + err.toString());
             binding.swipeRefresh.setRefreshing(false);
             Toast.makeText(this, R.string.error_fetch_similar_movies, LENGTH_LONG).show();
         };

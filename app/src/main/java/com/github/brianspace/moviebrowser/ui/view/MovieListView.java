@@ -17,8 +17,11 @@
 package com.github.brianspace.moviebrowser.ui.view;
 
 import android.content.Context;
+import android.databinding.ObservableList;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -40,6 +43,15 @@ import io.reactivex.disposables.Disposable;
  * Movie list view, supports pulling to refresh or load more.
  */
 public class MovieListView extends FrameLayout {
+
+    // region Private Constants
+
+    /**
+     * Tag for logcat.
+     */
+    private static final String TAG = MovieListView.class.getSimpleName();
+
+    // endregion
 
     // region Package Private Fields
 
@@ -103,6 +115,7 @@ public class MovieListView extends FrameLayout {
 
         @Override
         public void onError(final Throwable e) {
+            Log.w(TAG, "LoadingObserver.onError: " + e.toString());
             swipeRefreshLayout.setRefreshing(false);
             stopLoadingAnimation();
             Toast.makeText(getContext(), R.string.error_fetch_movie_list, Toast.LENGTH_LONG).show();
@@ -116,6 +129,27 @@ public class MovieListView extends FrameLayout {
             stopLoadingAnimation();
             isRefreshing = false;
             isLoadingNextPage = false;
+        }
+    }
+
+    /**
+     * RecyclerView adapter for movie view model list.
+     */
+    private static class MoviesAdapter extends RecyclerViewDatabindingAdapter<MovieViewModel> {
+
+        /**
+         * Constructor for MoviesAdapter.
+         *
+         * @param itemList Observable item list.
+         */
+        /* default */ MoviesAdapter(@NonNull final ObservableList<MovieViewModel> itemList) {
+            super(itemList, BR.movie, R.layout.item_poster);
+            setHasStableIds(true);
+        }
+
+        @Override
+        public long getItemId(final int position) {
+            return adapterItems.get(position).getId();
         }
     }
 
@@ -168,8 +202,7 @@ public class MovieListView extends FrameLayout {
             swipeRefreshLayout.setOnRefreshListener(null);
             movieGridView.setAdapter(null);
         } else {
-            final RecyclerViewDatabindingAdapter<MovieViewModel> adapter = new RecyclerViewDatabindingAdapter<>(
-                    movieList.getMovies(), BR.movie, R.layout.item_poster);
+            final MoviesAdapter adapter = new MoviesAdapter(movieList.getMovies());
             movieGridView.setAdapter(adapter);
 
             swipeRefreshLayout.setDirection(
