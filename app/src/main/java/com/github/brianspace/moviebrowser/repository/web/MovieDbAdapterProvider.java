@@ -99,8 +99,8 @@ final class MovieDbAdapterProvider {
 
         final OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
                 .addInterceptor(new ApiKeyInterceptor())
-                .connectTimeout(1, TimeUnit.SECONDS)
-                .readTimeout(1, TimeUnit.SECONDS)
+                .connectTimeout(Constants.TMDB_API_TIMEOUT_CONNECT, TimeUnit.SECONDS)
+                .readTimeout(Constants.TMDB_API_TIMEOUT_READ, TimeUnit.SECONDS)
                 .cache(cache);
 
         // Uncomment to use Stetho network debugging

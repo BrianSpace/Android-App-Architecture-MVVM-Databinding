@@ -16,6 +16,8 @@
 
 package com.github.brianspace.moviebrowser.repository;
 
+import com.github.brianspace.moviebrowser.BuildConfig;
+
 /**
  * Constants for repository sub-module.
  */
@@ -30,4 +32,14 @@ public class Constants {
      * Database Name (for favorite movies).
      */
     public static final String DATABASE_NAME = "MovieDB";
+
+    /**
+     * Timeout (in seconds) for connecting TMDb Web API. Use smaller value for debug mode.
+     */
+    public static final int TMDB_API_TIMEOUT_CONNECT = BuildConfig.DEBUG ? 1 : 5;
+
+    /**
+     * Timeout (in seconds) for reading from TMDb Web API. Use smaller value for debug mode.
+     */
+    public static final int TMDB_API_TIMEOUT_READ = BuildConfig.DEBUG ? 1 : 5;
 }
