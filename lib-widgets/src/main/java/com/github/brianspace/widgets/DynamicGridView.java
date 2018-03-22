@@ -25,12 +25,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 
 /**
  * Grid view that can adjust number of columns based on cell width.
  * Configured through "min_cell_width" and "cell_spacing" attribute.
  * CAUTION: assume header view type will not be 0.
+ * TODO: fix the alignment after item add/remove caused by assuming fixed item decorations during item animations.
  */
 public class DynamicGridView extends RecyclerView {
 
@@ -40,6 +42,16 @@ public class DynamicGridView extends RecyclerView {
      * Column count for the grid.
      */
     private int columnCount;
+
+    /**
+     * Flag to indicate that the item decorations need to be updated.
+     */
+    private boolean needUpdateItemDecoration;
+
+    /**
+     * Flag of active state.
+     */
+    private boolean isActive;
 
     // endregion
 
@@ -132,6 +144,47 @@ public class DynamicGridView extends RecyclerView {
         }
     }
 
+    /**
+     * Observer for adapter data. Used to invalidate item decorations if needed.
+     */
+    private final AdapterDataObserver adapterDataObserver = new AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            updateItemDecoration();
+        }
+
+        @Override
+        public void onItemRangeInserted(final int positionStart, final int itemCount) {
+            // Invalidate if the items are not appended at the end.
+            if (getAdapter().getItemCount() != positionStart + itemCount) {
+                updateItemDecoration();
+            }
+        }
+
+        @Override
+        public void onItemRangeRemoved(final int positionStart, final int itemCount) {
+            // Invalidate if the items are not removed at the end.
+            if (getAdapter().getItemCount() != positionStart) {
+                updateItemDecoration();
+            }
+        }
+
+        @Override
+        public void onItemRangeMoved(final int fromPosition, final int toPosition, final int itemCount) {
+            updateItemDecoration();
+        }
+
+        private void updateItemDecoration() {
+            Log.d("DynamicGridView", "updateItemDecoration: isActive = " + isActive);
+            if (isActive) {
+                invalidateItemDecorations();
+                getLayoutManager().requestLayout();
+            } else {
+                needUpdateItemDecoration = true;
+            }
+        }
+    };
+
     // endregion
 
     // region Constructors
@@ -164,6 +217,43 @@ public class DynamicGridView extends RecyclerView {
     public DynamicGridView(final Context context, @Nullable final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         init(context, attrs, defStyle);
+    }
+
+    // endregion
+
+    // region Public Overrides
+
+    @Override
+    @SuppressWarnings("PMD.CompareObjectsWithEquals")
+    public void setAdapter(@Nullable final Adapter adapter) {
+        final Adapter currentAdapter = getAdapter();
+        if (currentAdapter != null && currentAdapter != adapter) { // Compare object, not equals.
+            currentAdapter.unregisterAdapterDataObserver(adapterDataObserver);
+        }
+
+        super.setAdapter(adapter);
+        if (adapter == null) {
+            return;
+        }
+
+        adapter.registerAdapterDataObserver(adapterDataObserver);
+    }
+
+    // endregion
+
+    // region Protected Overrides
+
+    @Override
+    protected void onFocusChanged(final boolean gainFocus, final int direction,
+            @Nullable final Rect previouslyFocusedRect) {
+        Log.d("DynamicGridView", "onFocusChanged: gainFocus = " + gainFocus);
+        super.onFocusChanged(gainFocus, direction, previouslyFocusedRect);
+        isActive = gainFocus;
+        if (gainFocus && needUpdateItemDecoration) {
+            Log.d("DynamicGridView", "onFocusChanged: invalidateItemDecoration");
+            invalidateItemDecorations();
+            needUpdateItemDecoration = false;
+        }
     }
 
     // endregion
