@@ -1,6 +1,25 @@
 # Android App Architecture Demo - MVVM with databinding (Java version) [[Kotlin version](https://github.com/BrianSpace/Android-App-Architecture-MVVM-Databinding/tree/kotlin)] [[中文版](README_zh.md)]
 This is a sample project to demonstrate the Android application architecture with MVVM pattern, a simple client for [The Movie DB](https://www.themoviedb.org/) web API.
 
+## Table of Contents
+ - [Why MVVM?](#why-mvvm)
+ - [Screenshots](#screenshots)
+ - [Application Introduction](#application-introduction)
+ - [Application Architecture](#application-architecture)
+    - [Architecture Layers](#architecture-layers)
+    - [Major Components](#major-components)
+    - [Design decisions for the application](#design-decisions-for-the-application)
+    - [Module/Directory Structure (Development View)](#moduledirectory-structure-development-view)
+ - [Get started](#get-started)
+ - [Reusable Components](#reusable-components)
+    - [Common](#common)
+    - [Data Binding](#data-binding)
+    - [UI Layer](#ui-layer)
+ - [External Libraries/Frameworks/Widgets](#external-librariesframeworkswidgets)
+ - [Code Quality](#code-quality)
+ - [Notes](#notes)
+ - [License](#license)
+
 ## Why [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)?
 For client application development, MVVM is better than other MV* patterns like MVC or MVP. 
 
@@ -47,7 +66,15 @@ Most of the classe names are obvious. For those not very obvious:
 * [`IConfigStore`](app/src/main/java/com/github/brianspace/moviebrowser/repository/IConfigStore.java): used to access configuration storage.
 * [`IFavoriteStore`](app/src/main/java/com/github/brianspace/moviebrowser/repository/IFavoriteStore.java): used to access favorite movies.
 * [`IMovieDbService`](app/src/main/java/com/github/brianspace/moviebrowser/repository/IMovieDbService.java): used to access the Web API of "The Movie DB".
-### Module/Directory Structure
+### Design decisions for the application
+1. Model-View-ViewModel (MVVM) architecture: which takes advantage of the native [Android data-binding support](https://developer.android.com/topic/libraries/data-binding/index.html).
+2. Decouple with Dependency Injection: using [Dagger-2](http://google.github.io/dagger/).
+3. Asynchrony: I/O operations should run in background with [RxJava](https://github.com/ReactiveX/RxJava)+[RxAndroid](https://github.com/ReactiveX/RxAndroid).
+4. Activity navigation: URI based, decouple the activities. Implemented in [NavigationHelper](app/src/main/java/com/github/brianspace/moviebrowser/ui/nav/NavigationHelper.java).
+5. Object Lifecycle
+    * Entities in model layer are saved in the [EntityStore](app/src/main/java/com/github/brianspace/moviebrowser/models/EntityStore.java) (as WeakReferences to prevent memory leaks) which ensures the uniqueness (one object instance for each movie) so that different views of the same entity can be kept in sync through change notifications.
+    * View models have the same lifetime as the corresponding views. They have one to one mapping to the views displayed. Otherwise the different lifetime will be very confusing and cause more problems than benefits (believe me, I tried that in the beginning).
+### Module/Directory Structure (Development View)
 As the development view of the application architecture, it is an essential part to have a clear separation into modules and directory structure (packages in Java).
 * Modules division
     - app: main application module.
@@ -90,15 +117,6 @@ Before you can run the application, you need to register a developer account fol
 API_KEY="xxxxx"
 ```
 Reference: <https://developers.themoviedb.org/3/getting-started/authentication>
-## Design decisions for the application
-1. Model-View-ViewModel (MVVM) architecture: which takes advantage of the native [Android data-binding support](https://developer.android.com/topic/libraries/data-binding/index.html).
-2. Decouple with Dependency Injection: using [Dagger-2](http://google.github.io/dagger/).
-3. Asynchrony: I/O operations should run in background.
-4. Activity navigation: URI based, decouple the activities.
-5. Object Lifecycle
-    * Entities in model layer are saved in the EntityStore (as WeakReferences to prevent memory leaks) which ensures the uniqueness (one object instance for each movie) so that different views of the same entity can be kept in sync through change notifications.
-    * View models have the same lifetime as the corresponding views. They have one to one mapping to the views displayed. Otherwise the different lifetime will be very confusing and cause more problems than benefits (believe me, I tried that in the beginning).
-
 ## Reusable Components
 Project independent reusable components are developed in separate modules.
 ### Common
