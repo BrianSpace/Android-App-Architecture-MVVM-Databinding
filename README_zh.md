@@ -1,5 +1,24 @@
-# 安卓应用架构展示 - 基于数据绑定的MVVM架构 [[English Version](README.md)]
+# 安卓应用架构展示 - 基于数据绑定的MVVM架构 (Java 版本) [[Kotlin版本](../../blob/kotlin/README_zh.md)]  [[English Version](README.md)]
 本项目作为安卓应用MVVM架构的例子，展示了如何使用此架构开发一个影视信息网站[The Movie DB](https://www.themoviedb.org/)的客户端。
+
+## 目录
+ - [为什么采用MVVM?](#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%87%E7%94%A8-mvvm)
+ - [应用截屏](#%E5%BA%94%E7%94%A8%E6%88%AA%E5%B1%8F)
+ - [应用功能简介](#%E5%BA%94%E7%94%A8%E5%8A%9F%E8%83%BD%E7%AE%80%E4%BB%8B)
+ - [应用架构](#%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84)
+    - [架构分层](#%E6%9E%B6%E6%9E%84%E5%88%86%E5%B1%82)
+    - [主要组件](#%E4%B8%BB%E8%A6%81%E7%BB%84%E4%BB%B6)
+    - [应用的关键设计决策](#%E5%BA%94%E7%94%A8%E7%9A%84%E5%85%B3%E9%94%AE%E8%AE%BE%E8%AE%A1%E5%86%B3%E7%AD%96)
+    - [模块/主要目录结构（开发视图）](#%E6%A8%A1%E5%9D%97%E4%B8%BB%E8%A6%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%BC%80%E5%8F%91%E8%A7%86%E5%9B%BE)
+ - [如何开始](#%E5%A6%82%E4%BD%95%E5%BC%80%E5%A7%8B)
+ - [可重用组件](#%E5%8F%AF%E9%87%8D%E7%94%A8%E7%BB%84%E4%BB%B6)
+    - [通用功能](#%E9%80%9A%E7%94%A8%E5%8A%9F%E8%83%BD)
+    - [数据绑定支持](#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E6%94%AF%E6%8C%81)
+    - [UI层](#ui%E5%B1%82)
+ - [外部依赖：Libraries/Frameworks/Widgets](#%E5%A4%96%E9%83%A8%E4%BE%9D%E8%B5%96librariesframeworkswidgets)
+ - [代码质量](#%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F)
+ - [注意事项](#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+ - [License](#license)
 
 ## 为什么采用 [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)？
 作为客户端应用开发，MVVM是一个比其他的MV*模式（如MVC、MVP）更好的设计模式。 
@@ -25,7 +44,7 @@
     * 上拉可加载类似电影列表的下一页。
 * 在设置页面，可以清除应用的缓存（HTTP、图片）以及本地收藏。
 ## 应用架构
-### 结构分层
+### 架构分层
 ![](https://s1.ax1x.com/2018/03/11/9WRviF.png)
 * 依赖关系
     * 自上而下的单向依赖。下层通过以下形式与上层通讯：
@@ -46,6 +65,14 @@
 * [`IConfigStore`](app/src/main/java/com/github/brianspace/moviebrowser/repository/IConfigStore.java)用于存储配置信息。
 * [`IFavoriteStore`](app/src/main/java/com/github/brianspace/moviebrowser/repository/IFavoriteStore.java)用于存储用户收藏的电影。
 * [`IMovieDbService`](app/src/main/java/com/github/brianspace/moviebrowser/repository/IMovieDbService.java)用于请求"The Movie DB"的Web API。
+### 应用的关键设计决策
+1. 采用Model-View-ViewModel (MVVM) 结构，利用原生的[安卓数据绑定支持](https://developer.android.google.cn/topic/libraries/data-binding/index.html)。
+2. 用依赖注入解耦：使用[Dagger-2](http://google.github.io/dagger/)框架。
+3. 异步接口：I/O操作在后台线程进行。采用[RxJava](https://github.com/ReactiveX/RxJava)+[RxAndroid](https://github.com/ReactiveX/RxAndroid)实现。
+4. Activity跳转：基于URI，Activity之间无依赖。主要实现见[NavigationHelper](app/src/main/java/com/github/brianspace/moviebrowser/ui/nav/NavigationHelper.java)。
+5. 对象生命周期
+    * Model层的实体（Entities）由[EntityStore](app/src/main/java/com/github/brianspace/moviebrowser/models/EntityStore.java)维持WeakReference引用，以保证唯一性（每一部电影只对应一个对象实例）并防止内存泄露。这样同一个实体的不同视图就能通过实体发出的变化通知保持同步。
+    * View Model层对象和对应的视图有同样的生命周期，和展示的视图是一一对应的关系。如若不然，一方面会给理解对应关系带来困扰，而且生命周期的不一致会带来各种麻烦（相信我，开始的时候View Model也是唯一的）。
 ### 模块/主要目录结构（开发视图）
 作为系统结构的开发视图，清晰的模块划分和目录结构（对应Java的包结构）也是构成清晰架构必不可少的一部分。
 * 模块划分
@@ -89,15 +116,6 @@
 API_KEY="xxxxx"
 ```
 参考：<https://developers.themoviedb.org/3/getting-started/authentication>
-## 应用的关键设计决策
-1. 采用Model-View-ViewModel (MVVM) 结构，利用原生的[安卓数据绑定支持](https://developer.android.google.cn/topic/libraries/data-binding/index.html)。
-2. 用依赖注入解耦：使用[Dagger-2](http://google.github.io/dagger/)框架。
-3. 异步接口：I/O操作在后台线程进行。
-4. Activity跳转：基于URI，Activity之间无依赖。
-5. 对象生命周期
-    * Model层的实体（Entities）由EntityStore维持WeakReference引用，以保证唯一性（每一部电影只对应一个对象实例）并防止内存泄露。这样同一个实体的不同视图就能通过实体发出的变化通知保持同步。
-    * View Model层对象和对应的视图有同样的生命周期，和展示的视图是一一对应的关系。如若不然，一方面会给理解对应关系带来困扰，而且生命周期的不一致会带来各种麻烦（相信我，开始的时候View Model也是唯一的）。
-
 ## 可重用组件
 项目无关的可重用组件放在了单独的module里面：
 ### 通用功能
