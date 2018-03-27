@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply from: '../analysis/quality/static_analysis.gradle'
 
 android {
@@ -31,26 +34,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    lintOptions {
-        // Turn off analysis progress reporting by lint
-        quiet true
-        // Stop the gradle build if errors are found
-        abortOnError true
-        // Do not ignore lint warnings
-        ignoreWarnings false
-        // Treat warnings as errors
-        warningsAsErrors true
-
-        // Write log to console
-        textReport true
-        textOutput "stdout"
-
-        // Disabled rules
-        disable 'IconMissingDensityFolder'
-
-        // Ignore rules list
-        ignore 'ObsoleteLintCustomCheck' // 'butterknife.lint.InvalidR2UsageDetector'
-    }
+    lintOptions LINT_OPTIONS
 
     dataBinding {
         enabled = true
@@ -72,6 +56,7 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "API_KEY", API_KEY
+            multiDexEnabled true
         }
         release {
             buildConfigField "String", "API_KEY", API_KEY
@@ -89,6 +74,13 @@ dependencies {
     implementation project(':lib-widgets')
     implementation project(':lib-databinding')
 
+    // Kotlin library
+    implementation KOTLIN_STDLIB
+    implementation KOTLIN_REFLECT // Providing an explicit same version dependency to prevent strange errors.
+
+    // Databinding compiler
+    kapt DATABINDING_COMPILER
+
     // Test libraries
     testImplementation LIB_JUNIT
 
@@ -96,6 +88,9 @@ dependencies {
     testImplementation "org.mockito:mockito-core:2.15.0"
     // Unit test framework for Android SDK in normal JVM. https://github.com/robolectric/robolectric/
     testImplementation 'org.robolectric:robolectric:3.7.1'
+
+    // Mockito for Kotlin https://github.com/nhaarman/mockito-kotlin
+    testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
 
     // DexMaker (needed by Mockito)
     androidTestImplementation "com.linkedin.dexmaker:dexmaker:2.12.1"
@@ -119,12 +114,8 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.14.1'
     implementation 'com.google.dagger:dagger-android:2.14.1'
     implementation 'com.google.dagger:dagger-android-support:2.14.1'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.14.1'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
-
-    // View binding https://github.com/JakeWharton/butterknife
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    kapt 'com.google.dagger:dagger-android-processor:2.14.1'
+    kapt 'com.google.dagger:dagger-compiler:2.14.1'
 
     // Retrofit REST client http://square.github.io/retrofit/
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
@@ -146,7 +137,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.6.1'
     implementation 'com.github.bumptech.glide:annotations:4.6.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    kapt 'com.github.bumptech.glide:compiler:4.6.1'
 
     // Swipe to refresh https://github.com/omadahealth/SwipyRefreshLayout
     implementation 'com.github.omadahealth:swipy:1.2.3@aar'
@@ -154,7 +145,7 @@ dependencies {
     // Room https://developer.android.com/topic/libraries/architecture/room.html
     implementation LIB_ARCH_ROOM_RUNTIME
     implementation LIB_ARCH_ROOM_RXJAVA2
-    annotationProcessor LIB_ARCH_ROOM_COMPILER
+    kapt LIB_ARCH_ROOM_COMPILER
 
     // Use browser to view SQLite databases. https://github.com/amitshekhariitbhu/Android-Debug-Database
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.3'

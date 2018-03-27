@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply from: '../analysis/quality/static_analysis.gradle'
 
 android {
@@ -17,6 +19,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    lintOptions LINT_OPTIONS
+
     buildTypes {
         debug {
         }
@@ -28,7 +32,11 @@ android {
 }
 
 dependencies {
-    implementation project(':lib-common')
+    implementation KOTLIN_STDLIB
+
+    // Databinding compiler
+    kapt DATABINDING_COMPILER
+
     testImplementation LIB_JUNIT
     androidTestImplementation LIB_JUNIT
     androidTestImplementation project.LIB_SUPPORT_ANNOTATIONS
@@ -42,7 +50,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.6.1'
     implementation 'com.github.bumptech.glide:annotations:4.6.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    kapt 'com.github.bumptech.glide:compiler:4.6.1'
 
     // Swipe to refresh
     implementation 'com.github.omadahealth:swipy:1.2.3@aar'

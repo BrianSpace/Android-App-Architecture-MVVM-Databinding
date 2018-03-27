@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply from: '../analysis/quality/static_analysis.gradle'
 
 android {
@@ -19,6 +20,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    lintOptions LINT_OPTIONS
+
     buildTypes {
         debug {
         }
@@ -30,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation KOTLIN_STDLIB
     implementation project.LIB_SUPPORT_ANNOTATIONS
     testImplementation project.LIB_JUNIT
     androidTestImplementation project.LIB_TEST_RUNNER

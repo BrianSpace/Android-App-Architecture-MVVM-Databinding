@@ -15,12 +15,12 @@
     android:layout_height="match_parent">
 
     <com.github.brianspace.widgets.SwipeRefreshLayoutEx
-      android:id="@+id/swipe_refresh"
+      android:id="@+id/swipeRefreshLayout"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
       <com.github.brianspace.widgets.DynamicGridView
-        android:id="@+id/movie_list"
+        android:id="@+id/movieGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_poster"/>
@@ -28,7 +28,7 @@
     </com.github.brianspace.widgets.SwipeRefreshLayoutEx>
 
     <ProgressBar
-      android:id="@+id/loading"
+      android:id="@+id/loadingProgressBar"
       style="?android:progressBarStyleLarge"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

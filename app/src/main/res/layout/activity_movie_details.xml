@@ -20,7 +20,7 @@
     app:messageSource="@{movie.message}">
 
     <android.support.design.widget.AppBarLayout
-      android:id="@+id/app_bar"
+      android:id="@+id/appBar"
       android:layout_width="match_parent"
       android:layout_height="@dimen/app_bar_height"
       android:fitsSystemWindows="true"
@@ -36,7 +36,7 @@
         app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
         <com.github.brianspace.widgets.FixedAspectRatioImage
-          android:id="@+id/backdrop_image"
+          android:id="@+id/backdropImage"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:scaleType="centerCrop"
@@ -58,13 +58,13 @@
     </android.support.design.widget.AppBarLayout>
 
     <com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout
-      android:id="@+id/swipe_refresh"
+      android:id="@+id/swipeRefresh"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
       <com.github.brianspace.widgets.DynamicGridView
-        android:id="@+id/similar_movie_list"
+        android:id="@+id/similarMovieList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_poster"/>
@@ -79,7 +79,7 @@
       android:onClick="@{()->movie.onClickFavorite()}"
       android:src="@drawable/ic_favorite_border"
       android:tint="@color/text_white"
-      app:layout_anchor="@id/app_bar"
+      app:layout_anchor="@id/appBar"
       app:layout_anchorGravity="bottom|end"
       app:state="@{movie.state}"/>
 
