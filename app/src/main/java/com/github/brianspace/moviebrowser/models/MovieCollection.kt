@@ -34,7 +34,7 @@ import java.util.ArrayList
 /**
  * Tag for logging.
  */
-private val LOG_TAG = MovieCollection::class.java.simpleName
+private const val TAG = "MovieCollection"
 
 // endregion
 
@@ -113,7 +113,7 @@ protected constructor(
                         appendList.add(movieModel)
                     }
                 } else if (BuildConfig.DEBUG) {
-                    Log.w(LOG_TAG, "Invalid movie data for: \n" + movie.toString())
+                    Log.w(TAG, "Invalid movie data for: \n" + movie.toString())
                 }
             }
 
@@ -140,20 +140,22 @@ protected constructor(
         get() = movieList
 
     override fun load(): Completable {
-        if (isLoading && loadCompletable != null) {
-            return loadCompletable!!
+        return when {
+            (isLoading && loadCompletable != null) -> {
+                loadCompletable!!
+            }
+            isLoaded -> {
+                Completable.complete()
+            }
+            else -> {
+                isLoading = true
+                loadCompletable = firstPage
+                    .doFinally { isLoading = false }
+                    .map(resultHandler)
+                    .toCompletable()
+                loadCompletable!!
+            }
         }
-
-        if (isLoaded) {
-            return Completable.complete()
-        }
-
-        isLoading = true
-        loadCompletable = firstPage
-            .doFinally { isLoading = false }
-            .map(resultHandler)
-            .toCompletable()
-        return loadCompletable!!
     }
 
     override fun refresh(): Completable {

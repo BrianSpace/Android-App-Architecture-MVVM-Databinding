@@ -40,19 +40,23 @@ import java.util.Locale
 /**
  * Tag for logcat.
  */
-private val TAG = ImageLoader::class.java.simpleName
+private const val TAG = "ImageLoader"
+
+// endregion
+
+// region Private Properties
 
 /**
  * Options for Glide image library.
  */
-private val GLIDE_OPTIONS = RequestOptions()
+private val requestOptions = RequestOptions()
     .diskCacheStrategy(DiskCacheStrategy.ALL)
     .priority(Priority.NORMAL)
 
 /**
  * Loading events listener instance.
  */
-private val LOADING_LISTENER = LoadingListener()
+private val loadingListener = LoadingListener()
 
 // endregion
 
@@ -84,7 +88,7 @@ private class LoadingListener : RequestListener<Drawable> {
         dataSource: DataSource, isFirstResource: Boolean
     ): Boolean {
         if (BuildConfig.DEBUG) {
-            Log.i(
+            Log.v(
                 TAG, String.format(
                     Locale.ROOT,
                     "GLIDE onResourceReady(%s, %s, %s, %s, %s)", resource, model,
@@ -113,8 +117,8 @@ fun loadImage(view: ImageView, url: String?) {
     } else {
         Glide.with(view.context)
             .load(url)
-            .apply(GLIDE_OPTIONS)
-            .listener(LOADING_LISTENER)
+            .apply(requestOptions)
+            .listener(loadingListener)
             .into(view)
     }
 }
@@ -128,7 +132,7 @@ fun loadImage(view: ImageView, url: String?) {
  */
 class ImageLoader<T> {
 
-    // region Private Fields
+    // region Private Properties
 
     /**
      * Mapping from ImageView's hash code to the image provider.
@@ -181,7 +185,7 @@ class ImageLoader<T> {
     // region Public Methods
 
     /**
-     * Load image from the specified URL provider into the ImageView.
+     * Load image from the specified URL provider into the ImageView, after the size is known.
      *
      * @param view          the target ImageView
      * @param urlProvider   the object to provider the image URL.

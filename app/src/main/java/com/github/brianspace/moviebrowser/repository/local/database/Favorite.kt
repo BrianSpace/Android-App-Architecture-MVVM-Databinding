@@ -16,7 +16,11 @@
 
 package com.github.brianspace.moviebrowser.repository.local.database
 
-import android.arch.persistence.room.*
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
+import android.arch.persistence.room.Index
+import android.arch.persistence.room.PrimaryKey
 import com.github.brianspace.moviebrowser.repository.data.MovieData
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
@@ -32,7 +36,7 @@ private val gson = GsonBuilder()
 /**
  * ROOM Entity class for the database table to store favorite movies.
  */
-@Entity(indices = [Index("id"), Index("create_time")])
+@Entity(indices = [(Index("id")), Index("create_time")])
 class Favorite() {
     // region Properties
 

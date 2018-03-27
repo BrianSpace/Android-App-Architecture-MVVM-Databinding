@@ -37,12 +37,12 @@ import com.github.brianspace.utils.ImageLoader
 /**
  * Image loader for MovieViewModel.
  */
-private val MOVIE_IMAGE_LOADER = ImageLoader<MovieViewModel>()
+private val movieImageLoader = ImageLoader<MovieViewModel>()
 
 /**
  * Image loader for MovieDetailsViewModel.
  */
-private val MOVIE_DETAILS_IMAGE_LOADER = ImageLoader<MovieDetailsViewModel>()
+private val movieDetailsImageLoader = ImageLoader<MovieDetailsViewModel>()
 
 // endregion
 
@@ -67,7 +67,7 @@ fun loadImage(view: ImageView, url: String) {
  */
 @BindingAdapter("moviePoster")
 fun loadPosterImage(view: ImageView, movie: MovieViewModel) {
-    MOVIE_IMAGE_LOADER.loadImage(view, movie, { m -> m.getPosterUrl(view.width) })
+    movieImageLoader.loadImage(view, movie, { m -> m.getPosterUrl(view.width) })
 }
 
 /**
@@ -78,7 +78,7 @@ fun loadPosterImage(view: ImageView, movie: MovieViewModel) {
  */
 @BindingAdapter("movieBackdrop")
 fun loadBackdropImage(view: ImageView, movie: MovieDetailsViewModel) {
-    MOVIE_DETAILS_IMAGE_LOADER.loadImage(view, movie, { m -> m.getBackdropUrl(view.width) })
+    movieDetailsImageLoader.loadImage(view, movie, { m -> m.getBackdropUrl(view.width) })
 }
 
 /**

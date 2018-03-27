@@ -59,6 +59,7 @@ internal class MoviesViewModel(
      * Observer for the model layer list of movies.
      */
     private inner class MovieListObserver : ICollectionObserver {
+        @Suppress("ComplexMethod") // Simple cases.
         override
         fun onUpdate(
             observable: IObservable<ICollectionObserver>, action: ICollectionObserver.Action, item: Any?,

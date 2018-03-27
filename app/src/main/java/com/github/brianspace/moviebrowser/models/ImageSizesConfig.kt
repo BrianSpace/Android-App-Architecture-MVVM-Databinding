@@ -47,22 +47,12 @@ private const val SIZE_SEPARATOR = ':'
 /**
  * Regular expression to split the concatenated size string.
  */
-private val SIZE_SEPARATOR_REGEX = ":".toRegex()
+private val sizeSeparatorRegex = ":".toRegex()
 
 /**
  * Path for original image size.
  */
 private const val ORIGINAL = "original"
-
-/**
- * Default image size config. Use original images.
- */
-private val DEFAULT_SIZES = arrayOf(ORIGINAL)
-
-/**
- * Default image size strings.
- */
-private val DEFAULT_SIZE_STRINGS = Arrays.asList(*DEFAULT_SIZES)
 
 // endregion
 
@@ -181,7 +171,7 @@ private constructor(
             val sizeString = configStore.getConfigItem(configKey)
             return ImageSizesConfig(
                 imageBaseUrl,
-                if (sizeString == null) DEFAULT_SIZE_STRINGS else breakConcatenatedString(sizeString)
+                if (sizeString == null) listOf(ORIGINAL) else breakConcatenatedString(sizeString)
             )
         }
 
@@ -235,7 +225,7 @@ private constructor(
 
         @VisibleForTesting
         fun breakConcatenatedString(concatenated: String): List<String> {
-            return concatenated.split(SIZE_SEPARATOR_REGEX)
+            return concatenated.split(sizeSeparatorRegex)
         }
     }
 

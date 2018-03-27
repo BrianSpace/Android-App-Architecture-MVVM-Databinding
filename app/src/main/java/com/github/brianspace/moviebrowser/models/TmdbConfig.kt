@@ -27,7 +27,7 @@ import javax.inject.Inject
 /**
  * Tag for logcat.
  */
-private val TAG = TmdbConfig::class.java.simpleName
+private const val TAG = "TmdbConfig"
 
 // endregion
 

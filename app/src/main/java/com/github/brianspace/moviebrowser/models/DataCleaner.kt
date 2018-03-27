@@ -34,7 +34,7 @@ import javax.inject.Singleton
 /**
  * Tag for logcat.
  */
-private val TAG = DataCleaner::class.java.simpleName
+private const val TAG = "DataCleaner"
 
 /**
  * Set a minimum interval between the clearing events so that the messages will not change or disappear too fast.

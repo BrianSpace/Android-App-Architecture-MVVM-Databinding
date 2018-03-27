@@ -17,7 +17,12 @@
 package com.github.brianspace.moviebrowser.di.components
 
 import com.github.brianspace.moviebrowser.MovieBrowserApplication
-import com.github.brianspace.moviebrowser.di.modules.*
+import com.github.brianspace.moviebrowser.di.modules.AppModule
+import com.github.brianspace.moviebrowser.di.modules.FavoriteMovieListFragmentModule
+import com.github.brianspace.moviebrowser.di.modules.MainActivityModule
+import com.github.brianspace.moviebrowser.di.modules.MovieDetailsActivityModule
+import com.github.brianspace.moviebrowser.di.modules.NowPlayingMovieListFragmentModule
+import com.github.brianspace.moviebrowser.di.modules.SettingsFragmentModule
 import com.github.brianspace.moviebrowser.models.ModelsModule
 import com.github.brianspace.moviebrowser.repository.local.LocalRepositoryModule
 import com.github.brianspace.moviebrowser.repository.util.DirUtilModule

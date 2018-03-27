@@ -54,19 +54,17 @@ fun <ItemTypeT> setItems(
  * @param itemList the list of items to be bound to the view.
  * @param itemBrId the data binding BR ID for the variable to be bound to the item.
  * @param itemLayoutId the layout ID for list items.
- * @param headerData the object bound to the header.
- * @param headerLayoutId the layout ID for list header.
+ * @param headerParams parameters for the header.
  */
-@BindingAdapter("items", "itemBrId", "itemLayout", "headerData", "headerBrId", "headerLayout")
+@BindingAdapter("items", "itemBrId", "itemLayout", "headerParams")
 fun <ItemTypeT> setItemsAndHeader(
     view: RecyclerView, itemList: ObservableList<ItemTypeT>?,
     itemBrId: Int, @LayoutRes itemLayoutId: Int,
-    headerData: Any, headerBrId: Int, @LayoutRes headerLayoutId: Int
+    headerParams: HeaderedRecyclerViewDatabindingAdapter.HeaderParams
 ) {
     if (itemList == null) {
         view.adapter = null
     } else {
-        val headerParams = HeaderedRecyclerViewDatabindingAdapter.HeaderParams(headerLayoutId, headerBrId, headerData)
         val adapter = HeaderedRecyclerViewDatabindingAdapter(itemList, itemBrId, itemLayoutId, headerParams)
         view.adapter = adapter
     }

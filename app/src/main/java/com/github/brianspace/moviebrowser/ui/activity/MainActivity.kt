@@ -35,7 +35,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : DaggerAppCompatActivity() {
 
-    // region Package Private Fields
+    // region Private Properties
 
     /**
      * "Now Playing" resource string used for tab title.
@@ -57,10 +57,6 @@ class MainActivity : DaggerAppCompatActivity() {
     private val tabTitleSettings by lazy {
         getString(R.string.tab_settings)
     }
-
-    // endregion
-
-    // region Private Fields
 
     /**
      * Listener used to change the selected item in the bottom navigation view when the page is switched.
@@ -94,7 +90,7 @@ class MainActivity : DaggerAppCompatActivity() {
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    private inner class SectionsPagerAdapter/* default */ internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    private inner class SectionsPagerAdapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment? {
             return when (position) {
@@ -129,7 +125,7 @@ class MainActivity : DaggerAppCompatActivity() {
         initNavigationView()
     }
 
-    public override fun onStop() {
+    override fun onStop() {
         // Stop Glide to prevent memory leaks.
         // Use Glide.with(this).onDestroy() in onDestroy will cause exceptions.
         Glide.with(this).pauseRequests()
@@ -145,20 +141,20 @@ class MainActivity : DaggerAppCompatActivity() {
         viewPager!!.adapter = sectionsPagerAdapter
         viewPager!!.addOnPageChangeListener(onPageChangeListener)
         bottomNavigationView!!.setOnNavigationItemSelectedListener listener@ { item ->
-            when (item.itemId) {
+            return@listener when (item.itemId) {
                 R.id.navigation_home -> {
                     viewPager!!.currentItem = 0
-                    return@listener true
+                    true
                 }
                 R.id.navigation_favorites -> {
                     viewPager!!.currentItem = 1
-                    return@listener true
+                    true
                 }
                 R.id.navigation_settings -> {
                     viewPager!!.currentItem = 2
-                    return@listener true
+                    true
                 }
-                else -> return@listener false
+                else -> false
             }
         }
     }

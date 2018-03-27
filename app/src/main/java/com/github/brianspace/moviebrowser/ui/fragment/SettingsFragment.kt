@@ -40,7 +40,7 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 /**
  * Tag for logcat.
  */
-private val TAG = SettingsFragment::class.java.simpleName
+private const val TAG = "SettingsFragment"
 
 // endregion
 

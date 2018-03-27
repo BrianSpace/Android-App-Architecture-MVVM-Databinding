@@ -30,6 +30,16 @@ import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 
 /**
+ * Connect timeout (in seconds) for Glide.
+ */
+private const val CONNECT_TIMEOUT = 15L
+
+/**
+ * Read timeout (in seconds) for Glide.
+ */
+private const val READ_TIMEOUT = 30L
+
+/**
  * Glide Configurations.
  */
 @GlideModule
@@ -44,8 +54,8 @@ class CustomGlideModule : AppGlideModule() {
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         val builder = OkHttpClient().newBuilder()
-        builder.connectTimeout(15, TimeUnit.SECONDS)
-        builder.readTimeout(30, TimeUnit.SECONDS)
+        builder.connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+        builder.readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
 
         // Uncomment to use Stetho network debugging
         // if (BuildConfig.DEBUG) {

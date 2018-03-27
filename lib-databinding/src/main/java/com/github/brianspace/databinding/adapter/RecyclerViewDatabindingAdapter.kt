@@ -50,6 +50,8 @@ open class RecyclerViewDatabindingAdapter<ItemTypeT>(
     private val itemLayoutId: Int
 ) : RecyclerView.Adapter<RecyclerViewDatabindingAdapter.BindingHolder>() {
 
+    // region Private/Protected Properties
+
     /**
      * The internal list of items for the adapter, to avoid the crash caused by inconsistency.
      */

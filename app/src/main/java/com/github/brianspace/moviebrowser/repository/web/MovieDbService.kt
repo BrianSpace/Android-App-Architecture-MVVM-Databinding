@@ -34,7 +34,7 @@ import okhttp3.OkHttpClient
 /**
  * Tag for logcat.
  */
-private val TAG = MovieDbService::class.java.simpleName
+private const val TAG = "MovieDbService"
 
 // endregion
 

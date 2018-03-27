@@ -36,10 +36,12 @@ object Constants {
     /**
      * Timeout (in seconds) for connecting TMDb Web API. Use smaller value for debug mode.
      */
+    @Suppress("MagicNumber")
     val TMDB_API_TIMEOUT_CONNECT: Long = if (BuildConfig.DEBUG) 1 else 5
 
     /**
      * Timeout (in seconds) for reading from TMDb Web API. Use smaller value for debug mode.
      */
+    @Suppress("MagicNumber")
     val TMDB_API_TIMEOUT_READ: Long = if (BuildConfig.DEBUG) 1 else 5
 }

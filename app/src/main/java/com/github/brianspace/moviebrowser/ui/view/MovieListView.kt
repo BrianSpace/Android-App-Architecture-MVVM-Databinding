@@ -33,19 +33,19 @@ import io.reactivex.CompletableObserver
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.view_movie_list.view.*
 
+// region Private Constants
+
+/**
+ * Tag for logcat.
+ */
+private const val TAG = "MovieListView"
+
+// endregion
+
 /**
  * Movie list view, supports pulling to refresh or load more.
  */
 class MovieListView : FrameLayout {
-
-    // region Private Constants
-
-    /**
-     * Tag for logcat.
-     */
-    private val TAG = MovieListView::class.java.simpleName
-
-    // endregion
 
     // region Private Fields
 

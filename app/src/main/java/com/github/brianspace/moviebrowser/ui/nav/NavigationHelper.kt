@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+@file:Suppress("MatchingDeclarationName") // This file should not be named "NavUriParts".
 @file:JvmName("NavigationHelper")
 package com.github.brianspace.moviebrowser.ui.nav
 
@@ -105,20 +106,18 @@ const val PATH_DETAILS = "details"
 fun Activity.getValidNavUri(): NavUriParts {
     val parts = NavUriParts()
 
-    val uri = getUriFromIntent(this.intent) ?: return parts
+    val uri = getUriFromIntent(this.intent)
 
-    if (uri.scheme == URI_SCHEME && uri.authority == URI_HOST) {
+    if (uri != null && uri.scheme == URI_SCHEME && uri.authority == URI_HOST) {
         parts.uri = uri
         var uriPath = uri.path
-        if (uriPath == null || uriPath.isEmpty()) {
-            return parts
-        }
+        if (uriPath != null && !uriPath.isEmpty()) {
+            if (uriPath[0] == BACK_SLASH) {
+                uriPath = uriPath.substring(1) // Remove leading '/'
+            }
 
-        if (uriPath[0] == BACK_SLASH) {
-            uriPath = uriPath.substring(1) // Remove leading '/'
+            parts.pathNoLeadingSlash = uriPath
         }
-
-        parts.pathNoLeadingSlash = uriPath
     }
 
     return parts

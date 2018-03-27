@@ -14,6 +14,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-4"
+}
+
 allprojects {
     repositories {
         jcenter()
@@ -24,6 +28,19 @@ allprojects {
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
             // options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
+
+subprojects {
+    detekt {
+        version = "1.0.0.RC6-4"
+        profile("default") {
+            input = "$projectDir/src/main/java"
+            output = "$project.buildDir/reports"
+            // config = "$projectDir/detekt.yml"
+            filters = ".*/resources/.*,.*/tmp/.*"
+            parallel = true
         }
     }
 }

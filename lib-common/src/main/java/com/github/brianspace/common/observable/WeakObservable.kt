@@ -138,6 +138,7 @@ abstract class WeakObservable<ObserverT> : IObservable<ObserverT> {
 
     // region Private Methods
 
+    @Suppress("TooGenericExceptionCaught") // May be used by any subclasses.
     private fun notify(tempObserverList: List<ObserverT>, action: (ObserverT) -> Unit) {
         tempObserverList.forEach {
             try {

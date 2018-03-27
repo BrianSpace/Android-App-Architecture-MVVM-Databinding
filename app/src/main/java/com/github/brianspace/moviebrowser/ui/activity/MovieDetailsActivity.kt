@@ -49,7 +49,7 @@ import javax.inject.Inject
 /**
  * Tag for logcat.
  */
-private val TAG = MovieDetailsActivity::class.java.simpleName
+private const val TAG = "MovieDetailsActivity"
 
 // endregion
 
@@ -172,11 +172,9 @@ class MovieDetailsActivity : DaggerAppCompatActivity() {
 
         try {
             val id = Integer.parseInt(idStr)
-            if (id <= 0) {
-                return
+            if (id > 0) {
+                showMovieDetails(id)
             }
-
-            showMovieDetails(id)
         } catch (e: NumberFormatException) {
             Log.e(TAG, "Invalid ID in intent: $idStr")
         }

@@ -36,7 +36,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Tag for logcat.
  */
-private val TAG = MovieDetailsViewModel::class.java.simpleName
+private const val TAG = "MovieDetailsViewModel"
 
 // endregion
 
