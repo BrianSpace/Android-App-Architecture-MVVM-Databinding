@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.util
+package com.github.brianspace.moviebrowser.di.modules.repository
 
 import android.content.Context
 import com.github.brianspace.moviebrowser.di.qualifiers.ApplicationContext
+import com.github.brianspace.moviebrowser.repository.util.DirUtil
+import com.github.brianspace.moviebrowser.repository.util.IDirUtil
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

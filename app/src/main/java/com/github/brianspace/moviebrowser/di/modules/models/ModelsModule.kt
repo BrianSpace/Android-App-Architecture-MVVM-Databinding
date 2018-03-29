@@ -14,8 +14,16 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.models
+package com.github.brianspace.moviebrowser.di.modules.models
 
+import com.github.brianspace.moviebrowser.models.EntityStore
+import com.github.brianspace.moviebrowser.models.FavoriteMovieCollection
+import com.github.brianspace.moviebrowser.models.IEntityStore
+import com.github.brianspace.moviebrowser.models.IFavoriteMovieCollection
+import com.github.brianspace.moviebrowser.models.IImageConfig
+import com.github.brianspace.moviebrowser.models.IMovieCollection
+import com.github.brianspace.moviebrowser.models.NowPlayingMovieCollection
+import com.github.brianspace.moviebrowser.models.TmdbConfig
 import com.github.brianspace.moviebrowser.repository.IConfigStore
 import com.github.brianspace.moviebrowser.repository.IFavoriteStore
 import com.github.brianspace.moviebrowser.repository.IMovieDbService

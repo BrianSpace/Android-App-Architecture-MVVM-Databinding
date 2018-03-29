@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.web
+package com.github.brianspace.moviebrowser.di.modules.repository
 
 import com.github.brianspace.moviebrowser.repository.IMovieDbService
 import com.github.brianspace.moviebrowser.repository.util.IDirUtil
+import com.github.brianspace.moviebrowser.repository.web.IMovieDbApi
+import com.github.brianspace.moviebrowser.repository.web.MovieDbAdapterProvider
+import com.github.brianspace.moviebrowser.repository.web.MovieDbService
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 import okhttp3.OkHttpClient
+import javax.inject.Singleton
 
 /**
  * Dependency Injection Module (based on Dagger-2).

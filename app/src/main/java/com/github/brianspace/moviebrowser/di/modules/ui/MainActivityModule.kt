@@ -1,4 +1,4 @@
-package com.github.brianspace.moviebrowser.di.modules
+package com.github.brianspace.moviebrowser.di.modules.ui
 
 import com.github.brianspace.moviebrowser.ui.activity.MainActivity
 import dagger.Module

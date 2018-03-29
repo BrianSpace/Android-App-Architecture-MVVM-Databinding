@@ -17,6 +17,7 @@
 package com.github.brianspace.moviebrowser.repository.web
 
 import android.content.Context
+import com.github.brianspace.moviebrowser.di.modules.repository.MovieDbServiceModule
 import com.github.brianspace.moviebrowser.repository.IMovieDbService
 import com.github.brianspace.moviebrowser.repository.util.DirUtil
 import org.junit.Assert.assertEquals

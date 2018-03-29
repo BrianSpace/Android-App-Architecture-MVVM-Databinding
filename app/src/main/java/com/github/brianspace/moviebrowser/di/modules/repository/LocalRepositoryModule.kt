@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.repository.local
+package com.github.brianspace.moviebrowser.di.modules.repository
 
 import android.content.Context
 import com.bumptech.glide.Glide
 import com.github.brianspace.moviebrowser.di.qualifiers.ApplicationContext
 import com.github.brianspace.moviebrowser.repository.IConfigStore
 import com.github.brianspace.moviebrowser.repository.IFavoriteStore
+import com.github.brianspace.moviebrowser.repository.local.ConfigStore
+import com.github.brianspace.moviebrowser.repository.local.FavoriteStore
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

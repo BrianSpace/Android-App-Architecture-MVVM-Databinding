@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
-package com.github.brianspace.moviebrowser.viewmodels
+package com.github.brianspace.moviebrowser.di.modules.viewmodels
 
 import com.github.brianspace.moviebrowser.models.IEntityStore
 import com.github.brianspace.moviebrowser.models.IFavoriteMovieCollection
 import com.github.brianspace.moviebrowser.models.IImageConfig
 import com.github.brianspace.moviebrowser.models.IMovieCollection
+import com.github.brianspace.moviebrowser.viewmodels.IMovieList
+import com.github.brianspace.moviebrowser.viewmodels.IViewModelFactory
+import com.github.brianspace.moviebrowser.viewmodels.MoviesViewModel
+import com.github.brianspace.moviebrowser.viewmodels.ViewModelFactory
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -36,7 +40,11 @@ class ViewModelsModule {
         imageConfig: IImageConfig, entityStore: IEntityStore,
         favoriteMovieCollection: IFavoriteMovieCollection
     ): IViewModelFactory {
-        return ViewModelFactory(imageConfig, entityStore, favoriteMovieCollection)
+        return ViewModelFactory(
+            imageConfig,
+            entityStore,
+            favoriteMovieCollection
+        )
     }
 
     @Provides
