@@ -56,7 +56,7 @@
 * Model层是整个应用的领域模型，应与UI和平台无关。换句话说，就是既不依赖于应用的交互及UI设计，也不依赖于安卓平台。（本项目中依赖了SparseArray，但只是出于性能的需要，如果有必要可随时替换。）
 * Repository层是对数据访问的抽象，包括本地数据（Shared Preferences, SQLite数据库）及外部Web APIs。
 ### 主要组件
-![](https://s1.ax1x.com/2018/03/11/9WRxG4.png)
+![](https://s1.ax1x.com/2018/04/11/Ckvg0O.png)
 
 大部分的类名的含义都很明显。不是那么明显的：
 * [`TmdbConfig`](app/src/main/java/com/github/brianspace/moviebrowser/models/TmdbConfig.java)：用于处理来自TMDb网站的配置信息。参见<https://developers.themoviedb.org/3/configuration/get-api-configuration>。[`IImageConfig`](app/src/main/java/com/github/brianspace/moviebrowser/models/IImageConfig.java)是供上面的View Model层获取图片路径的接口。
