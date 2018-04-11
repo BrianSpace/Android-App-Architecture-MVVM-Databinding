@@ -98,9 +98,5 @@ project.ext {
 
         // Disabled rules
         disable 'IconMissingDensityFolder'
-        disable 'UnusedResources' // This rule cannot find references in Kotlin files.
-
-        // Ignore rules list
-        ignore 'ObsoleteLintCustomCheck' // 'butterknife.lint.InvalidR2UsageDetector'
     }
 }
