@@ -24,13 +24,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.brianspace.moviebrowser.R
-import com.github.brianspace.moviebrowser.models.DataCleaner
-import com.github.brianspace.moviebrowser.models.DataCleaner.Stage
+import com.github.brianspace.moviebrowser.viewmodels.SettingsViewModel
 import dagger.android.DaggerFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Timed
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_settings.*
 
@@ -55,7 +54,7 @@ class SettingsFragment : DaggerFragment() {
      * Data cleaner instance.
      */
     @Inject
-    internal lateinit var dataCleaner: DataCleaner
+    internal lateinit var settingsViewModel: SettingsViewModel
 
     /**
      * Clearing message format string.
@@ -63,6 +62,11 @@ class SettingsFragment : DaggerFragment() {
     private val msgClearingFmt by lazy {
         getString (R.string.message_clearing_fmt)
     }
+
+    /**
+     * Save subscriptions for unsubscribing during onDestroy().
+     */
+    private val compositeDisposable = CompositeDisposable()
 
     // endregion
 
@@ -86,6 +90,13 @@ class SettingsFragment : DaggerFragment() {
         clearCacheBtn.setOnClickListener { _ -> clearData(false) }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // Unsubscribe observers.
+        compositeDisposable.dispose()
+    }
+
     // endregion
 
     // region Private Methods
@@ -97,12 +108,10 @@ class SettingsFragment : DaggerFragment() {
             setMessage(getString(R.string.message_clearing))
         }
 
-        val onNextConsumer = Consumer<Timed<Stage>> { ret ->
+        val onNextConsumer = Consumer<Int> { ret ->
             // onNext
-            Log.d(TAG, "Stage: " + ret.value())
-            val msg = getStageMessage(ret.value())
-            if (msg != null) {
-                dialog.setMessage(msg)
+            if (ret != 0) {
+                dialog.setMessage(String.format(msgClearingFmt, getString(ret)))
             }
         }
 
@@ -118,24 +127,9 @@ class SettingsFragment : DaggerFragment() {
             dialog.dismiss()
         }
 
-        dataCleaner.clearData(clearFavorites)
+        compositeDisposable.add(settingsViewModel.clearData(clearFavorites)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(onNextConsumer, onErrorConsumer, onComplete)
+                .subscribe(onNextConsumer, onErrorConsumer, onComplete))
         dialog.show()
-    }
-
-    private fun getStageMessage(state: Stage): String? {
-        var msg: String? = when (state) {
-            DataCleaner.Stage.FAVORITES -> getString(R.string.message_clearing_item_favorites)
-            DataCleaner.Stage.HTTP_CACHE -> getString(R.string.message_clearing_item_cache)
-            DataCleaner.Stage.IMAGE_CACHE -> getString(R.string.message_clearing_item_images)
-            else -> null
-        }
-
-        msg?.let {
-            msg = String.format(msgClearingFmt, msg)
-        }
-
-        return msg
     }
 }
