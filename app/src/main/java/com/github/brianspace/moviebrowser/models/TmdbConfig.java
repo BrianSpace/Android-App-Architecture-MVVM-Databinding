@@ -16,6 +16,7 @@
 
 package com.github.brianspace.moviebrowser.models;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import com.github.brianspace.moviebrowser.repository.IConfigStore;
@@ -165,6 +166,7 @@ class TmdbConfig implements IImageConfig {
     /**
      * Initialize. Should be call only once on application start.
      */
+    @SuppressLint("CheckResult") // We won't cancel the init process so the return value can be safely ignored.
     public void init() {
         movieDbService.getConfiguration().subscribe(
                 result -> updateAndSave(result.getImageConfig()),

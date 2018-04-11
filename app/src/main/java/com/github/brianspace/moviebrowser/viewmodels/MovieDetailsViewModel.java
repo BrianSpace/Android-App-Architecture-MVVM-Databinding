@@ -16,6 +16,7 @@
 
 package com.github.brianspace.moviebrowser.viewmodels;
 
+import android.annotation.SuppressLint;
 import android.databinding.Bindable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -200,6 +201,8 @@ public class MovieDetailsViewModel extends MovieViewModel {
 
     // region Private Methods
 
+    // The user may not cancel the call when leave the page so the return value can be safely ignored.
+    @SuppressLint("CheckResult")
     private void addToFavorite() {
         favoriteMovieCollection.addToFavorite(movie).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -211,6 +214,8 @@ public class MovieDetailsViewModel extends MovieViewModel {
                 }, onErrorConsumer);
     }
 
+    // The user may not cancel the call when leave the page so the return value can be safely ignored.
+    @SuppressLint("CheckResult")
     private void removeFromFavorite() {
         favoriteMovieCollection.removeFromFavorite(movie).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
