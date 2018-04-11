@@ -26,13 +26,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.github.brianspace.moviebrowser.R;
-import com.github.brianspace.moviebrowser.models.DataCleaner;
-import com.github.brianspace.moviebrowser.models.DataCleaner.Stage;
+import com.github.brianspace.moviebrowser.viewmodels.SettingsViewModel;
 import dagger.android.DaggerFragment;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Timed;
 import javax.inject.Inject;
 
 /**
@@ -49,13 +48,22 @@ public class SettingsFragment extends DaggerFragment {
 
     // endregion
 
+    // region Private Fields
+
+    /**
+     * Save subscriptions for unsubscribing during onDestroy().
+     */
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    // endregion
+
     // region Package Private Fields
 
     /**
      * Data cleaner instance.
      */
     @Inject
-    /* default */ DataCleaner dataCleaner;
+    /* default */ SettingsViewModel settingsViewModel;
 
     // endregion
 
@@ -78,6 +86,14 @@ public class SettingsFragment extends DaggerFragment {
         return root;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        // Unsubscribe observers.
+        compositeDisposable.dispose();
+    }
+
     // endregion
 
     // region Private Methods
@@ -88,12 +104,12 @@ public class SettingsFragment extends DaggerFragment {
                 .setMessage(R.string.message_clearing)
                 .setCancelable(false).create();
 
-        final Consumer<Timed<Stage>> onNextConsumer = ret -> {
+        final String msgClearingFmt = getString(R.string.message_clearing_fmt);
+
+        final Consumer<Integer> onNextConsumer = ret -> {
             // onNext
-            Log.d(TAG, "Stage: " + ret.value());
-            final String msg = getStageMessage(ret.value());
-            if (msg != null) {
-                dialog.setMessage(msg);
+            if (ret != 0) {
+                dialog.setMessage(String.format(msgClearingFmt, getString(ret)));
             }
         };
 
@@ -107,36 +123,10 @@ public class SettingsFragment extends DaggerFragment {
             dialog.dismiss();
         };
 
-        dataCleaner.clearData(clearFavorites)
+        compositeDisposable.add(settingsViewModel.clearData(clearFavorites)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(onNextConsumer, onErrorConsumer, onComplete);
+                .subscribe(onNextConsumer, onErrorConsumer, onComplete));
         dialog.show();
-    }
-
-    @Nullable
-    private String getStageMessage(final Stage state) {
-        final String msgClearingFmt = getString(R.string.message_clearing_fmt);
-        String msg;
-        switch (state) {
-            case FAVORITES:
-                msg = getString(R.string.message_clearing_item_favorites);
-                break;
-            case HTTP_CACHE:
-                msg = getString(R.string.message_clearing_item_cache);
-                break;
-            case IMAGE_CACHE:
-                msg = getString(R.string.message_clearing_item_images);
-                break;
-            default:
-                msg = null;
-                break;
-        }
-
-        if (msg != null) {
-            msg = String.format(msgClearingFmt, msg);
-        }
-
-        return msg;
     }
 
     // endregion

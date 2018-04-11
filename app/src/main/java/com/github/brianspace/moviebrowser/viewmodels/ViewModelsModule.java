@@ -16,10 +16,12 @@
 
 package com.github.brianspace.moviebrowser.viewmodels;
 
+import com.github.brianspace.moviebrowser.models.DataCleaner;
 import com.github.brianspace.moviebrowser.models.IEntityStore;
 import com.github.brianspace.moviebrowser.models.IFavoriteMovieCollection;
 import com.github.brianspace.moviebrowser.models.IImageConfig;
 import com.github.brianspace.moviebrowser.models.IMovieCollection;
+import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Named;
@@ -55,5 +57,11 @@ public class ViewModelsModule {
             @Named("Favorites") final IMovieCollection favoriteMovieCollection,
             final IViewModelFactory factory) {
         return new MoviesViewModel(favoriteMovieCollection, factory);
+    }
+
+    @Provides
+    @Singleton
+    /* default */ static SettingsViewModel provideSettingsViewModel(final Lazy<DataCleaner> dataCleaner) {
+        return new SettingsViewModel(dataCleaner);
     }
 }
