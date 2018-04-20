@@ -105,14 +105,14 @@ dependencies {
     testImplementation LIB_JUNIT
 
     // Mock framework: Mockito http://site.mockito.org/
-    testImplementation "org.mockito:mockito-core:2.15.0"
+    testImplementation "org.mockito:mockito-core:2.18.0"
     // Unit test framework for Android SDK in normal JVM. https://github.com/robolectric/robolectric/
-    testImplementation 'org.robolectric:robolectric:3.7.1'
+    testImplementation 'org.robolectric:robolectric:3.8'
 
     // DexMaker (needed by Mockito)
-    androidTestImplementation "com.linkedin.dexmaker:dexmaker:2.12.1"
-    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
-    androidTestImplementation "org.mockito:mockito-core:2.15.0"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker:2.16.0"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.16.0"
+    androidTestImplementation "org.mockito:mockito-core:2.18.0"
     androidTestImplementation LIB_TEST_RUNNER
     androidTestImplementation LIB_SUPPORT_ANNOTATIONS
 
@@ -125,40 +125,39 @@ dependencies {
     compileOnly 'javax.annotation:javax.annotation-api:1.3'
 
     // ConstraintLayout
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 
     // Dependency Injection. http://google.github.io/dagger/
-    implementation 'com.google.dagger:dagger:2.14.1'
-    implementation 'com.google.dagger:dagger-android:2.14.1'
-    implementation 'com.google.dagger:dagger-android-support:2.14.1'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.14.1'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
+    implementation 'com.google.dagger:dagger:2.15'
+    implementation 'com.google.dagger:dagger-android:2.15'
+    implementation 'com.google.dagger:dagger-android-support:2.15'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.15'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
 
     // View binding https://github.com/JakeWharton/butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     // Retrofit REST client http://square.github.io/retrofit/
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 
     // OKHttp http://square.github.io/okhttp/
-    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
     // GSON JSON lib https://github.com/google/gson
     implementation 'com.google.code.gson:gson:2.8.2'
 
     // RX
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2' // https://github.com/ReactiveX/RxAndroid
-    //noinspection GradleDependency
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.9' // https://github.com/ReactiveX/RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.12' // https://github.com/ReactiveX/RxJava
 
     // Glide image library https://github.com/bumptech/glide
-    implementation 'com.github.bumptech.glide:glide:4.6.1'
-    implementation 'com.github.bumptech.glide:okhttp3-integration:4.6.1'
-    implementation 'com.github.bumptech.glide:annotations:4.6.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.7.1'
+    implementation 'com.github.bumptech.glide:annotations:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
     // Swipe to refresh https://github.com/omadahealth/SwipyRefreshLayout
     implementation 'com.github.omadahealth:swipy:1.2.3@aar'
@@ -176,8 +175,6 @@ dependencies {
     debugImplementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
     // Leak detection https://github.com/square/leakcanary
-    //noinspection GradleDependency
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    //noinspection GradleDependency
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
