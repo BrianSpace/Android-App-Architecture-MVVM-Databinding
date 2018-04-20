@@ -126,8 +126,8 @@ open class HeaderedRecyclerViewDatabindingAdapter<ItemTypeT>(
         super.onBindViewHolder(holder, position)
     }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
-        val layoutManager = recyclerView!!.layoutManager
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        val layoutManager = recyclerView.layoutManager
         if (layoutManager is GridLayoutManager) {
             layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(i: Int): Int {

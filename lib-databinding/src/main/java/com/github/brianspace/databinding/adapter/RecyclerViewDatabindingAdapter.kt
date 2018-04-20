@@ -166,7 +166,7 @@ open class RecyclerViewDatabindingAdapter<ItemTypeT>(
         }
     }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         if (!itemList.isEmpty()) {
             listChangedCallback.onChanged(itemList)
         }
@@ -175,7 +175,7 @@ open class RecyclerViewDatabindingAdapter<ItemTypeT>(
         super.onAttachedToRecyclerView(recyclerView)
     }
 
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView?) {
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         this.itemList.removeOnListChangedCallback(listChangedCallback)
         super.onDetachedFromRecyclerView(recyclerView)
     }
