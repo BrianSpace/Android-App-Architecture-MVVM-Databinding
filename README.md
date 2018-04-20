@@ -36,11 +36,11 @@ For this demo project, using MVVM seems a little bit over engineering. But my pu
 ## Application Introduction
 The application has the following features:
 * The main page has three tabs: Now Playing, Favorite and Settings.
-* The Now Playing tab displaying the movies now playing.
+* The Now Playing tab displays the movies now playing.
     * Each movie is shown as a poster picture in the grid, with rating stars and favorite state icon on top of it.
     * You can pull down the list to refresh and pull up at the end to load the next page.
 * The Favorite tab shows the local favorite list and has the same functionality as the Now Playing tab.
-* Click on the movie poster will navigate to the movie details page, in which additional details like backdrop image, tagline and similar movies will be shown.
+* Clicking on the movie poster will navigate to the movie details page, in which additional details like backdrop image, tagline and similar movies will be shown.
     * The float action button in the page shows a progress circle animation while loading and the favorite state icons will show after loading. You can click the favorite icon to add to or remove from local favorite movie list.
     * You can pull up the similar movies list to load the next page.
 * In settings page, you can clear the cached HTTP responses, images, as well as local favorites.
@@ -48,7 +48,7 @@ The application has the following features:
 ### Architecture Layers
 ![](static/layers.png)
 * Dependency
-    * Unidirectional dependency from top-down. Lower layer communite with upper layer through various notification means:
+    * Unidirectional dependency from top-down. Lower layers communicate with upper layers through various notification means:
         * View Models notify UI through databinding.
         * Models notify View Models through observable notification events.
         * Repository layer just returns values through RxJava event sources to Models.
@@ -59,7 +59,7 @@ The application has the following features:
 ### Major Components
 ![](static/components.png)
 
-Most of the classe names are obvious. For those not very obvious:
+Most of the classe names are obvious. For those not so obvious:
 * [`TmdbConfig`](app/src/main/java/com/github/brianspace/moviebrowser/models/TmdbConfig.java): the class used to get the TMDb configurations. See <https://developers.themoviedb.org/3/configuration/get-api-configuration>. [`IImageConfig`](app/src/main/java/com/github/brianspace/moviebrowser/models/IImageConfig.java) is the interface for View Models to get image path configurations.
 * [`EntityStore`](app/src/main/java/com/github/brianspace/moviebrowser/models/EntityStore.java): the object store to hold the (weak) references of model layer entities.
 * [`DataCleaner`](app/src/main/java/com/github/brianspace/moviebrowser/models/DataCleaner.java): use to clear application cache for HTTP, image as well as local database.
@@ -100,23 +100,27 @@ As the development view of the application architecture, it is an essential part
         - view: application related UI controls.
     - viewmodels: View Model layer classes.
 * Directory structure in Common module
-    - objstore: object stor
-    - observable: observable patter inplementation for objects and collections.
+    - objstore: object store
+    - observable: observable pattern implementation for objects and collections.
     - util: utility classes.
 * Directory structure in Databinding module
     - adapter: list adapter for RecyclerView, supporting binding to ObservableList.
     - message: display notifications through databinding, so that view model can show notifications (Toast for now) without depending on UI controls.
 * Directory structure in Widgets module
-    - behaviors: behaviros for CoordinatorLayout.
+    - behaviors: behaviors for CoordinatorLayout.
     - utils: utility classes. ImageLoader for now.
     - widgets: project independent, reusable UI controls.
 ## Get started
+### Clone the project with submodules
+Since the project has a submodule, you need to clone with `--recurse-submodules` parameter, or run `git submodule update --init --recursive` later to clone also the submodules.
+### Prepare TMDb API key
 Before you can run the application, you need to register a developer account following the [TMDb introductions](https://developers.themoviedb.org/3/getting-started/introduction) and get the API key. Then add the API key in the project's `gradle.properties` file:
 ```properties
 # API Key for the TMDb API
 API_KEY="xxxxx"
 ```
 Reference: <https://developers.themoviedb.org/3/getting-started/authentication>
+
 ## Reusable Components
 Project independent reusable components are developed in separate modules.
 ### Common

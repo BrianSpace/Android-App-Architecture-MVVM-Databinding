@@ -62,19 +62,31 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(RELEASE_STORE_FILE)
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
+            /*
+             Either set the signing config here or set the following values in "gradle.properties" then reference here:
+               RELEASE_STORE_FILE=xxx.xxx
+               RELEASE_STORE_PASSWORD=xxx
+               RELEASE_KEY_ALIAS=xxx
+               RELEASE_KEY_PASSWORD=xxx
+            */
+            // storeFile file(RELEASE_STORE_FILE)
+            // storePassword RELEASE_STORE_PASSWORD
+            // keyAlias RELEASE_KEY_ALIAS
+            // keyPassword RELEASE_KEY_PASSWORD
         }
     }
 
+    // Set your TMDb API key here or set API_KEY in "gradle.properties" then reference here.
+    // Reference: https://developers.themoviedb.org/3/getting-started/authentication
+    def API_KEY_VALUE = project.ext.properties.API_KEY
+    API_KEY_VALUE = API_KEY_VALUE == null ? "\"\"" : API_KEY_VALUE
+
     buildTypes {
         debug {
-            buildConfigField "String", "API_KEY", API_KEY
+            buildConfigField "String", "API_KEY", API_KEY_VALUE
         }
         release {
-            buildConfigField "String", "API_KEY", API_KEY
+            buildConfigField "String", "API_KEY", API_KEY_VALUE
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true

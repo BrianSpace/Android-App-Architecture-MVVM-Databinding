@@ -11,6 +11,7 @@
   <string name="msg_added_to_favorite">已经收藏</string>
   <string name="msg_removed_from_favorite">已从收藏中删除</string>
 
+  <string name="error_unauthorized">调用TMDb服务器API失败。请设置正确的API key。</string>
   <string name="error_fetch_movie_list">从服务器读取电影列表失败</string>
   <string name="error_fetch_movie_details">从服务器读取电影详情失败</string>
   <string name="error_fetch_similar_movies">从服务器读取相似电影列表失败</string>

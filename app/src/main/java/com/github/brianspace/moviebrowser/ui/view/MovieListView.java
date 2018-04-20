@@ -38,6 +38,7 @@ import com.github.brianspace.widgets.SwipeRefreshLayoutEx;
 import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 import io.reactivex.CompletableObserver;
 import io.reactivex.disposables.Disposable;
+import retrofit2.HttpException;
 
 /**
  * Movie list view, supports pulling to refresh or load more.
@@ -50,6 +51,11 @@ public class MovieListView extends FrameLayout {
      * Tag for logcat.
      */
     private static final String TAG = MovieListView.class.getSimpleName();
+
+    /**
+     * HTTP error code 401: unauthorized.
+     */
+    private static final int HTTP_ERROR_UNAUTHORIZED = 401;
 
     // endregion
 
@@ -118,6 +124,14 @@ public class MovieListView extends FrameLayout {
             Log.w(TAG, "LoadingObserver.onError: " + e.toString());
             swipeRefreshLayout.setRefreshing(false);
             stopLoadingAnimation();
+            if (e instanceof HttpException) {
+                final HttpException httpException = (HttpException) e;
+                if (httpException.code() == HTTP_ERROR_UNAUTHORIZED) {
+                    Toast.makeText(getContext(), R.string.error_unauthorized, Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+
             Toast.makeText(getContext(), R.string.error_fetch_movie_list, Toast.LENGTH_LONG).show();
         }
 
