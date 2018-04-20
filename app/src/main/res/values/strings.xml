@@ -10,6 +10,7 @@
   <string name="msg_added_to_favorite">Added to favorite</string>
   <string name="msg_removed_from_favorite">Removed from favorite</string>
 
+  <string name="error_unauthorized">Failed to call TMDb web API. Please specify a valid API key.</string>
   <string name="error_fetch_movie_list">Failed to fetch movie list.</string>
   <string name="error_fetch_movie_details">Failed to fetch movie details.</string>
   <string name="error_fetch_similar_movies">Failed to fetch similar movies.</string>

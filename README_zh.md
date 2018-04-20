@@ -110,6 +110,9 @@
     - utils：工具类。现在有ImageLoader。
     - widgets：项目无关、可重用的UI控件。
 ## 如何开始
+### 克隆项目（包括submodule）到本地
+由于项目包含了一个submodule，所以需要在clone的时候使用参数`--recurse-submodules`，或者是clone之后运行`git submodule update --init --recursive`来初始化submodule。
+### 准备TMDb的API key
 在你想自己编译运行这个应用之前，需要先按照[TMDb的指引](https://developers.themoviedb.org/3/getting-started/introduction)去注册一个开发者帐号并拿到API key，然后把API key接入项目的`gradle.properties`文件中：
 ```properties
 # API Key for the TMDb API

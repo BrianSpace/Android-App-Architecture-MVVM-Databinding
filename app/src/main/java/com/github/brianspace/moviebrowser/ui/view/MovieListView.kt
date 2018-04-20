@@ -32,6 +32,7 @@ import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirec
 import io.reactivex.CompletableObserver
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.view_movie_list.view.*
+import retrofit2.HttpException
 
 // region Private Constants
 
@@ -39,6 +40,12 @@ import kotlinx.android.synthetic.main.view_movie_list.view.*
  * Tag for logcat.
  */
 private const val TAG = "MovieListView"
+
+
+/**
+ * HTTP error code 401: unauthorized.
+ */
+private const val HTTP_ERROR_UNAUTHORIZED = 401
 
 // endregion
 
@@ -85,6 +92,11 @@ class MovieListView : FrameLayout {
             Log.w(TAG, "LoadingObserver.onError: " + e.toString())
             swipeRefreshLayout.isRefreshing = false
             stopLoadingAnimation()
+            if (e is HttpException && e.code() == HTTP_ERROR_UNAUTHORIZED) {
+                Toast.makeText(context, R.string.error_unauthorized, Toast.LENGTH_LONG).show()
+                return
+            }
+
             Toast.makeText(context, R.string.error_fetch_movie_list, Toast.LENGTH_LONG).show()
         }
 
