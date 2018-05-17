@@ -118,9 +118,9 @@ class FavoriteStore implements IFavoriteStore {
 
     @Override
     public Single<List<MovieData>> getAllFavoriteMovies() {
-        final FavoriteDao dao = favoriteDatabase.getDao();
         return Single.fromCallable(() -> {
             final List<MovieData> movies = new ArrayList<>();
+            final FavoriteDao dao = favoriteDatabase.getDao();
             for (final Favorite favorite : dao.loadAllFavorites()) {
                 movies.add(favorite.toMovie());
             }
