@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply from: '../analysis/quality/static_analysis.gradle'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION

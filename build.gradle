@@ -25,6 +25,14 @@ allprojects {
     }
 }
 
+subprojects {
+    afterEvaluate {
+        if (it.plugins.hasPlugin('com.android.application') || (it.plugins.hasPlugin('com.android.library'))) {
+            it.apply from:rootProject.file('analysis/quality/static_analysis.gradle')
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
